@@ -1,9 +1,11 @@
+import { Box, fade, IconButton, MenuItem, Toolbar } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
+import EmailIcon from '@material-ui/icons/Email';
+import InstagramIcon from '@material-ui/icons/Instagram';
 import React from 'react';
-
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -32,6 +34,12 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  colorInherit: {
+    '&:hover': {
+      backgroundColor: fade(theme.palette.secondary.main, 0.25),
+    },
+  },
+  regular: { justifyContent: 'space-between', minHeight: 'auto' },
 }));
 
 export default function SimpleTabs() {
@@ -48,22 +56,44 @@ export default function SimpleTabs() {
         position='fixed'
         classes={{ positionFixed: classes.positionFixed }}
       >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label='simple tabs example'
-        >
-          <Tab
-            classes={{ textColorInherit: classes.textColorInherit }}
-            label='Item One'
-            {...a11yProps(0)}
-          />
-          <Tab
-            classes={{ textColorInherit: classes.textColorInherit }}
-            label='Item Two'
-            {...a11yProps(1)}
-          />
-        </Tabs>
+        <Toolbar classes={{ regular: classes.regular }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label='simple tabs example'
+            TabIndicatorProps={{ style: { display: 'none' } }}
+          >
+            <Tab
+              classes={{ textColorInherit: classes.textColorInherit }}
+              label='KATEGORIE'
+              {...a11yProps(0)}
+            />
+            <Tab
+              classes={{ textColorInherit: classes.textColorInherit }}
+              label='PHOTOSHOP'
+              {...a11yProps(1)}
+            />
+          </Tabs>
+          <Box style={{ display: 'flex' }}>
+            {' '}
+            <MenuItem>
+              <IconButton
+                classes={{ colorInherit: classes.colorInherit }}
+                color='inherit'
+              >
+                <InstagramIcon />
+              </IconButton>
+            </MenuItem>
+            <MenuItem>
+              <IconButton
+                classes={{ colorInherit: classes.colorInherit }}
+                color='inherit'
+              >
+                <EmailIcon />
+              </IconButton>
+            </MenuItem>
+          </Box>
+        </Toolbar>
       </AppBar>
       <div className={classes.offset} />
     </>

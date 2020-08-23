@@ -42,9 +42,9 @@ const Home = () => {
           >
             <StyledLogo
               transition={{ duration: 1 }}
-              initial={{ maxWidth: '100%' }}
-              animate={{ maxWidth: '100%' }}
-              exit={{ width: '0' }}
+              initial={{ maxWidth: '100vw' }}
+              animate={{ maxWidth: '100vw' }}
+              exit={{ maxWidth: '0' }}
             >
               <img src='logo.jpg' alt='logo' />
               <motion.div
