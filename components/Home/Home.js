@@ -7,10 +7,12 @@ const StyledWelcome = styled(motion.main)`
   height: 100vh;
   width: 100vw;
   display: flex;
+  top: 0;
+  left: 0;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  position: relative;
+  position: fixed;
   z-index: 101;
 `;
 const StyledLogo = styled(motion.div)`
