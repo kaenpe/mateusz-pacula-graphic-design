@@ -25,7 +25,7 @@ const Home = () => {
           <Button
             variant='contained'
             color='primary'
-            style={{ margin: '0 auto' }}
+            style={{ margin: '0 auto', borderRadius: '10px' }}
             onClick={() => setShowWelcome((prevState) => !prevState)}
           >
             Hide
