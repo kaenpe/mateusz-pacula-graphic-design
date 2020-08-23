@@ -23,14 +23,20 @@ const useStyles = makeStyles((theme) => ({
   },
   offset: theme.mixins.toolbar,
   textColorInherit: {
+    width: '1em',
+    '&::after': {
+      content: '""',
+      backgroundColor: 'white',
+      width: '0',
+      height: '0',
+      position: 'absolute',
+      opacity: 0.15,
+    },
     '&:hover': {
       '&::after': {
-        content: '""',
-        backgroundColor: 'white',
+        transition: 'all 0.5s ease-in',
         width: '100%',
         height: '100%',
-        position: 'absolute',
-        opacity: 0.15,
       },
     },
   },
@@ -40,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   regular: { justifyContent: 'space-between', minHeight: 'auto' },
+  flexContainer: {
+    height: '60px',
+  },
 }));
 
 export default function SimpleTabs() {
@@ -56,17 +65,24 @@ export default function SimpleTabs() {
         position='fixed'
         classes={{ positionFixed: classes.positionFixed }}
       >
-        <Toolbar classes={{ regular: classes.regular }}>
+        <Toolbar classes={{ regular: classes.regular }} disableGutters>
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label='simple tabs example'
             TabIndicatorProps={{ style: { display: 'none' } }}
+            classes={{ flexContainer: classes.flexContainer }}
           >
             <Tab
               classes={{ textColorInherit: classes.textColorInherit }}
+              label='HOME'
+              {...a11yProps(1)}
+            />
+
+            <Tab
+              classes={{ textColorInherit: classes.textColorInherit }}
               label='KATEGORIE'
-              {...a11yProps(0)}
+              {...a11yProps(3)}
             />
             <Tab
               classes={{ textColorInherit: classes.textColorInherit }}
