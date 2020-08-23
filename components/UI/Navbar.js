@@ -1,11 +1,12 @@
-import { Box, fade, IconButton, MenuItem, Toolbar } from '@material-ui/core';
+import { Box, IconButton, MenuItem, Toolbar } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import { makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import EmailIcon from '@material-ui/icons/Email';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import React from 'react';
+import Link from '../../src/Link';
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -23,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   offset: theme.mixins.toolbar,
   textColorInherit: {
-    width: '1em',
     '&::after': {
       content: '""',
       backgroundColor: 'white',
@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
       opacity: 0.15,
     },
     '&:hover': {
+      textDecoration: 'none',
       '&::after': {
         transition: 'all 0.5s ease-in',
         width: '100%',
@@ -49,8 +50,35 @@ const useStyles = makeStyles((theme) => ({
   flexContainer: {
     height: '60px',
   },
+  gutters: {
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
 }));
-
+const StyledTab = withStyles({
+  root: {
+    '&::after': {
+      content: '""',
+      backgroundColor: 'white',
+      width: '0',
+      height: '0',
+      position: 'absolute',
+      opacity: 0.15,
+    },
+    '&:hover': {
+      textDecoration: 'none',
+      '&::after': {
+        transition: 'all 0.5s ease-in',
+        width: '100%',
+        height: '100%',
+      },
+    },
+  },
+  label: {
+    textTransform: 'capitalize',
+  },
+})(Tab);
 export default function SimpleTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -74,6 +102,8 @@ export default function SimpleTabs() {
             classes={{ flexContainer: classes.flexContainer }}
           >
             <Tab
+              component={Link}
+              href={'/'}
               classes={{ textColorInherit: classes.textColorInherit }}
               label='HOME'
               {...a11yProps(1)}
@@ -88,11 +118,13 @@ export default function SimpleTabs() {
               classes={{ textColorInherit: classes.textColorInherit }}
               label='PHOTOSHOP'
               {...a11yProps(1)}
+              component={Link}
+              href={'/photoshop'}
             />
           </Tabs>
           <Box style={{ display: 'flex' }}>
             {' '}
-            <MenuItem>
+            <MenuItem classes={{ gutters: classes.gutters }}>
               <IconButton
                 classes={{ colorInherit: classes.colorInherit }}
                 color='inherit'
@@ -100,7 +132,7 @@ export default function SimpleTabs() {
                 <InstagramIcon />
               </IconButton>
             </MenuItem>
-            <MenuItem>
+            <MenuItem classes={{ gutters: classes.gutters }}>
               <IconButton
                 classes={{ colorInherit: classes.colorInherit }}
                 color='inherit'
