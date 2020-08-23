@@ -1,4 +1,10 @@
-import { Box, IconButton, MenuItem, Toolbar } from '@material-ui/core';
+import {
+  Box,
+  IconButton,
+  MenuItem,
+  Toolbar,
+  withStyles,
+} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
@@ -23,24 +29,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 100,
   },
   offset: theme.mixins.toolbar,
-  textColorInherit: {
-    '&::after': {
-      content: '""',
-      backgroundColor: 'white',
-      width: '0',
-      height: '0',
-      position: 'absolute',
-      opacity: 0.15,
-    },
-    '&:hover': {
-      textDecoration: 'none',
-      '&::after': {
-        transition: 'all 0.5s ease-in',
-        width: '100%',
-        height: '100%',
-      },
-    },
-  },
+
   colorInherit: {
     '&:hover': {
       backgroundColor: fade(theme.palette.secondary.main, 0.25),
@@ -75,11 +64,9 @@ const StyledTab = withStyles({
       },
     },
   },
-  label: {
-    textTransform: 'capitalize',
-  },
 })(Tab);
-export default function SimpleTabs() {
+
+export default function Navbar() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -101,21 +88,15 @@ export default function SimpleTabs() {
             TabIndicatorProps={{ style: { display: 'none' } }}
             classes={{ flexContainer: classes.flexContainer }}
           >
-            <Tab
+            <StyledTab
               component={Link}
               href={'/'}
-              classes={{ textColorInherit: classes.textColorInherit }}
               label='HOME'
               {...a11yProps(1)}
             />
 
-            <Tab
-              classes={{ textColorInherit: classes.textColorInherit }}
-              label='KATEGORIE'
-              {...a11yProps(3)}
-            />
-            <Tab
-              classes={{ textColorInherit: classes.textColorInherit }}
+            <StyledTab label='KATEGORIE' {...a11yProps(3)} />
+            <StyledTab
               label='PHOTOSHOP'
               {...a11yProps(1)}
               component={Link}
@@ -124,7 +105,7 @@ export default function SimpleTabs() {
           </Tabs>
           <Box style={{ display: 'flex' }}>
             {' '}
-            <MenuItem classes={{ gutters: classes.gutters }}>
+            <MenuItem disableRipple classes={{ gutters: classes.gutters }}>
               <IconButton
                 classes={{ colorInherit: classes.colorInherit }}
                 color='inherit'
@@ -132,7 +113,7 @@ export default function SimpleTabs() {
                 <InstagramIcon />
               </IconButton>
             </MenuItem>
-            <MenuItem classes={{ gutters: classes.gutters }}>
+            <MenuItem disableRipple classes={{ gutters: classes.gutters }}>
               <IconButton
                 classes={{ colorInherit: classes.colorInherit }}
                 color='inherit'
