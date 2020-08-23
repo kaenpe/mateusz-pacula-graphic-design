@@ -3,6 +3,8 @@ import { ThemeProvider } from '@material-ui/styles';
 import App from 'next/app';
 import Head from 'next/head';
 import React from 'react';
+import Layout from '../components/UI/Layout';
+import Navbar from '../components/UI/Navbar';
 import theme from '../src/theme';
 import '../styles/globals.css';
 class MyApp extends App {
@@ -28,7 +30,10 @@ class MyApp extends App {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <Component {...pageProps} />
+          <Layout>
+            <Navbar></Navbar>
+            <Component {...pageProps} />
+          </Layout>
         </ThemeProvider>
       </>
     );

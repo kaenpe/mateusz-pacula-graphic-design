@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, Container, Typography } from '@material-ui/core';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -21,9 +21,8 @@ const StyledLogo = styled(motion.div)`
   flex-direction: column;
 `;
 const StyledHome = styled.main`
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   top: 0;
   left: 0;
   z-index: '100';
@@ -73,21 +72,11 @@ const Home = () => {
           </StyledWelcome>
         )}
       </AnimatePresence>
-      <StyledHome
-        style={{
-          position: 'fixed',
-          height: '100vh',
-          width: '100vw',
-          top: 0,
-          left: 0,
-          zIndex: '100',
-        }}
-      >
-        {' '}
-        <Typography variant='h1' style={{ position: 'fixed' }}>
-          Dog
-        </Typography>
-      </StyledHome>
+      <Container maxWidth={false}>
+        <StyledHome>
+          <Typography variant='h1'>Dog</Typography>
+        </StyledHome>
+      </Container>
     </>
   );
 };
