@@ -20,6 +20,18 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 100,
   },
   offset: theme.mixins.toolbar,
+  textColorInherit: {
+    '&:hover': {
+      '&::after': {
+        content: '""',
+        backgroundColor: 'white',
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        opacity: 0.15,
+      },
+    },
+  },
 }));
 
 export default function SimpleTabs() {
@@ -41,8 +53,16 @@ export default function SimpleTabs() {
           onChange={handleChange}
           aria-label='simple tabs example'
         >
-          <Tab label='Item One' {...a11yProps(0)} />
-          <Tab label='Item Two' {...a11yProps(1)} />
+          <Tab
+            classes={{ textColorInherit: classes.textColorInherit }}
+            label='Item One'
+            {...a11yProps(0)}
+          />
+          <Tab
+            classes={{ textColorInherit: classes.textColorInherit }}
+            label='Item Two'
+            {...a11yProps(1)}
+          />
         </Tabs>
       </AppBar>
       <div className={classes.offset} />
