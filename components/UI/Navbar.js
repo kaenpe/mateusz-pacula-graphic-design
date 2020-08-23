@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
   },
   offset: theme.mixins.toolbar,
   textColorInherit: {
-    width: '1em',
     '&::after': {
       content: '""',
       backgroundColor: 'white',
@@ -42,12 +41,22 @@ const useStyles = makeStyles((theme) => ({
   },
   colorInherit: {
     '&:hover': {
-      backgroundColor: fade(theme.palette.secondary.main, 0.25),
+      backgroundColor: fade(theme.palette.secondary.main, 0.5),
     },
   },
   regular: { justifyContent: 'space-between', minHeight: 'auto' },
   flexContainer: {
     height: '60px',
+  },
+  colorSecondary: {
+    '&:hover': {
+      backgroundColor: 'white',
+    },
+  },
+  gutters: {
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
   },
 }));
 
@@ -92,7 +101,7 @@ export default function SimpleTabs() {
           </Tabs>
           <Box style={{ display: 'flex' }}>
             {' '}
-            <MenuItem>
+            <MenuItem classes={{ gutters: classes.gutters }}>
               <IconButton
                 classes={{ colorInherit: classes.colorInherit }}
                 color='inherit'
@@ -100,7 +109,7 @@ export default function SimpleTabs() {
                 <InstagramIcon />
               </IconButton>
             </MenuItem>
-            <MenuItem>
+            <MenuItem classes={{ gutters: classes.gutters }}>
               <IconButton
                 classes={{ colorInherit: classes.colorInherit }}
                 color='inherit'
