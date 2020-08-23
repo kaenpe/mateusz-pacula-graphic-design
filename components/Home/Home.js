@@ -74,7 +74,9 @@ const Home = () => {
       </AnimatePresence>
       <Container maxWidth={false}>
         <StyledHome>
-          <Typography variant='h1'>Dog</Typography>
+          <Typography variant='h1' color='secondary'>
+            Lorem Ipsum
+          </Typography>
         </StyledHome>
       </Container>
     </>
