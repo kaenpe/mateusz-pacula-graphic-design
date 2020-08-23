@@ -1,5 +1,5 @@
-import { Button } from '@material-ui/core';
-import { motion } from 'framer-motion';
+import { Button, Typography } from '@material-ui/core';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 const StyledWelcome = styled(motion.main)`
@@ -9,35 +9,55 @@ const StyledWelcome = styled(motion.main)`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
 `;
-
-const variants = {
-  open: { width: '100vw' },
+const StyledLogo = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+const closeWelcome = {
+  open: { width: 'auto' },
   closed: { width: 0 },
 };
 const Home = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   return (
     <div>
-      <StyledWelcome
-        transition={{ duration: 1 }}
-        animate={showWelcome ? 'open' : 'closed'}
-        variants={variants}
-      >
-        <motion.div
-          transition={{ duration: 0.5 }}
-          animate={showWelcome ? { x: 0 } : { x: '-10vw' }}
-        >
-          <Button
-            variant='contained'
-            color='primary'
-            style={{ margin: '0 auto', borderRadius: '10px' }}
-            onClick={() => setShowWelcome((prevState) => !prevState)}
+      <AnimatePresence>
+        {showWelcome && (
+          <StyledWelcome
+            transition={{ duration: 1 }}
+            animate={showWelcome ? 'open' : 'closed'}
+            variants={closeWelcome}
+            unmountOnExit
           >
-            <strong>PORTFOLIO</strong>
-          </Button>
-        </motion.div>
-      </StyledWelcome>
+            <StyledLogo
+              transition={{ duration: 1 }}
+              animate={showWelcome ? 'open' : 'closed'}
+              variants={closeWelcome}
+            >
+              <img src='logo.jpg' alt='logo' />
+              {showWelcome && (
+                <Button
+                  variant='contained'
+                  color='primary'
+                  style={{
+                    margin: '0 auto',
+                    borderRadius: '10px',
+                    zIndex: '101',
+                  }}
+                  onClick={() => setShowWelcome((prevState) => !prevState)}
+                >
+                  <strong>PORTFOLIO</strong>
+                </Button>
+              )}
+            </StyledLogo>
+          </StyledWelcome>
+        )}
+      </AnimatePresence>
+
+      <Typography variant='h1'>Dog</Typography>
     </div>
   );
 };
