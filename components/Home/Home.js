@@ -72,7 +72,11 @@ const Home = () => {
         )}
       </AnimatePresence>
       <Container maxWidth={false}>
-        <StyledHome></StyledHome>
+        <StyledHome>
+          <Typography variant='h1' color='secondary'>
+            Lorem Ipsum
+          </Typography>
+        </StyledHome>
       </Container>
     </>
   );
