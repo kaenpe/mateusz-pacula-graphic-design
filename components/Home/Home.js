@@ -1,4 +1,4 @@
-import { Button, Container } from '@material-ui/core';
+import { Button, Container, Typography } from '@material-ui/core';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
