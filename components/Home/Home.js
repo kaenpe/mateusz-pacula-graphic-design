@@ -6,6 +6,9 @@ const StyledWelcome = styled(motion.main)`
   background-color: white;
   height: 100vh;
   width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const variants = {
@@ -21,16 +24,19 @@ const Home = () => {
         animate={showWelcome ? 'open' : 'closed'}
         variants={variants}
       >
-        {showWelcome && (
+        <motion.div
+          transition={{ duration: 0.5 }}
+          animate={showWelcome ? { x: 0 } : { x: '-10vw' }}
+        >
           <Button
             variant='contained'
             color='primary'
             style={{ margin: '0 auto', borderRadius: '10px' }}
             onClick={() => setShowWelcome((prevState) => !prevState)}
           >
-            Hide
+            <strong>PORTFOLIO</strong>
           </Button>
-        )}
+        </motion.div>
       </StyledWelcome>
     </div>
   );
