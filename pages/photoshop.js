@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-const StyledPhotoshopLogo = styled.div`
+const StyledPhotoshopLogo = styled.object`
   /* Rectangle 1 */
 
   width: 270px;
   height: 270px;
-  background-color: #c4c4c4;
-  z-index: 99;
+  display: inline-block;
+
   border-radius: 45px;
   display: flex;
   align-items: center;
@@ -14,22 +14,28 @@ const StyledPhotoshopLogo = styled.div`
 
   /* Figma_StyKj7D2Jy 1 */
 `;
-const StyledImg = styled.div`
+const StyledImg = styled.object`
   /* Rectangle 1 */
 
-  position: relative;
   width: 250px;
   height: 250px;
-  z-index: 100;
-  background: url('/Figma_StyKj7D2Jy 1figma.svg');
+  display: inline-block;
+
   border-radius: 45px;
   /* Figma_StyKj7D2Jy 1 */
 `;
 const photoshop = () => {
   return (
-    <StyledPhotoshopLogo>
-      <StyledImg></StyledImg>
-    </StyledPhotoshopLogo>
+    <>
+      <StyledPhotoshopLogo
+        type='image/svg+xml'
+        data='Rectangle 1figma.svg'
+      ></StyledPhotoshopLogo>
+      <StyledImg
+        type='image/svg+xml'
+        data='Figma_StyKj7D2Jy 1figma.svg'
+      ></StyledImg>
+    </>
   );
 };
 
