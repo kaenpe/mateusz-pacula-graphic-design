@@ -34,14 +34,16 @@ const StyledWrapper = styled(motion.div)`
     }
   }
 `;
-const StyledPhotoshopLogo = styled(motion.img)`
+const StyledRectangle = styled(motion.img)`
   width: 270px;
+  max-width: 70%;
+  max-height: 50%;
   height: 270px;
   border-radius: 45px;
   position: absolute;
   z-index: 200;
 `;
-const StyledImg = styled(motion.img)`
+const StyledPhotoshopLogo = styled(motion.img)`
   width: 250px;
   height: 250px;
   align-self: center;
@@ -54,18 +56,18 @@ const Photoshop = () => {
   return (
     <>
       <StyledWrapper>
-        <StyledPhotoshopLogo
+        <StyledRectangle
           // type='image/svg+xml'
           // data='Rectangle 1figma.svg'
           src='/Rectangle 1figma.svg'
           alt='ps logo'
-        ></StyledPhotoshopLogo>
-        <StyledImg
+        ></StyledRectangle>
+        <StyledPhotoshopLogo
           // data='Figma_StyKj7D2Jy 1figma.svg'
           // type='image/svg+xml'
           src='/Figma_StyKj7D2Jy 1figma.svg'
           alt='ps logo'
-        ></StyledImg>
+        ></StyledPhotoshopLogo>
       </StyledWrapper>
     </>
   );

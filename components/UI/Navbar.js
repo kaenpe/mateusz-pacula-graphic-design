@@ -4,6 +4,7 @@ import {
   MenuItem,
   Tab,
   Toolbar,
+  useMediaQuery,
   withStyles,
 } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
@@ -77,7 +78,7 @@ const StyledTab = withStyles({
 
 export default function Navbar() {
   const classes = useStyles();
-
+  const matches = useMediaQuery('(min-width:600px)');
   const router = useRouter();
   const [value, setValue] = React.useState(router.pathname === '/' ? 0 : 1);
   const handleChange = (event, newValue) => {
@@ -92,7 +93,6 @@ export default function Navbar() {
       >
         <Toolbar classes={{ regular: classes.regular }} disableGutters>
           <Tabs
-            textColor='secondary'
             value={value}
             onChange={handleChange}
             aria-label='simple tabs example'
