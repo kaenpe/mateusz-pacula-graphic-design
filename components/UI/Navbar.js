@@ -92,7 +92,7 @@ export default function Navbar() {
       >
         <Toolbar classes={{ regular: classes.regular }} disableGutters>
           <Tabs
-            color='secondary'
+            textColor='secondary'
             value={value}
             onChange={handleChange}
             aria-label='simple tabs example'
