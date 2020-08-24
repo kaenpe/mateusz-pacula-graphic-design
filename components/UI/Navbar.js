@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
   },
   positionFixed: {
     zIndex: 3,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   offset: theme.mixins.toolbar,
 

@@ -1,6 +1,3 @@
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -14,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import { useContext } from 'react';
 import { DrawerContext } from '../../contexts/DrawerContext';
+import Link from '../../src/Link';
 
 const drawerWidth = 240;
 
@@ -43,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
   },
   drawer: {
-    width: drawerWidth,
     flexShrink: 0,
   },
   drawerPaper: {
@@ -55,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   content: {
     flexGrow: 1,
@@ -89,26 +86,19 @@ const SideDrawer = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position='fixed'
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color='inherit'
-            aria-label='open drawer'
-            onClick={handleDrawerOpen}
-            edge='start'
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+    <>
+      <Toolbar>
+        <IconButton
+          color='inherit'
+          aria-label='open drawer'
+          onClick={handleDrawerOpen}
+          edge='start'
+          className={clsx(classes.menuButton, open && classes.hide)}
+        >
+          <MenuIcon />
+        </IconButton>
+      </Toolbar>
+
       <Drawer
         className={classes.drawer}
         variant='persistent'
@@ -118,17 +108,23 @@ const SideDrawer = () => {
           paper: classes.drawerPaper,
         }}
       >
-        <Divider />
-        <List>
-          <ListItem button key={'HOME'}>
-            <ListItemText primary={'HOME'} />
-          </ListItem>
-          <ListItem button key={'KATEGORIE'}>
-            <ListItemText primary={'KATEGORIE'} />
-          </ListItem>
-          <ListItem button key={'PHOTOSHOP'}>
-            <ListItemText primary={'PHOTOSHOP'} />
-          </ListItem>
+        <List style={{ textAlign: 'center' }}>
+          {[
+            { type: 'HOME', href: '/' },
+            { type: 'KATEGORIE', href: '/kategorie' },
+            { type: 'PHOTOSHOP', href: '/photoshop' },
+          ].map(({ type, href }) => (
+            <ListItem
+              button
+              key={type}
+              component={Link}
+              href={href}
+              onClick={handleDrawerClose}
+              style={{ textAlign: 'center' }}
+            >
+              <ListItemText primary={type} />
+            </ListItem>
+          ))}
         </List>
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
@@ -139,9 +135,8 @@ const SideDrawer = () => {
             )}
           </IconButton>
         </div>
-        <Divider />
       </Drawer>
-    </div>
+    </>
   );
 };
 export default SideDrawer;
