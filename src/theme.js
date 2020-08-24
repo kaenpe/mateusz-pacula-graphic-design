@@ -16,12 +16,12 @@ const theme = createMuiTheme({
       default: '#4f504e',
     },
   },
-  // props: {
-  //   MuiButtonBase: {
-  //     // The properties to apply
-  //     disableRipple: true, // No more ripple, on the whole application!
-  //   },
-  // },
+  props: {
+    MuiButtonBase: {
+      // The properties to apply
+      disableRipple: true, // No more ripple, on the whole application!
+    },
+  },
 });
 
 export default theme;

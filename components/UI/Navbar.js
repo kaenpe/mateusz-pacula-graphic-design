@@ -11,7 +11,8 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import EmailIcon from '@material-ui/icons/Email';
 import InstagramIcon from '@material-ui/icons/Instagram';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import Link from '../../src/Link';
 function a11yProps(index) {
   return {
@@ -44,23 +45,31 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'transparent',
     },
   },
+  bigIndicator: {
+    height: '50px',
+  },
 }));
 const StyledTab = withStyles({
   root: {
     '&::after': {
       content: '""',
       backgroundColor: 'white',
-      width: '0',
-      height: '0',
+      transition: 'transform 0.4s ease-out',
+      width: '100%',
+      height: '100%',
+      transform: 'scale(0.001, 0.001)',
       position: 'absolute',
-      opacity: 0.15,
+      opacity: 0.05,
+      pointerEvents: 'none',
+      zIndex: 0,
     },
     '&:hover': {
       textDecoration: 'none',
       '&::after': {
-        transition: 'all 0.5s ease-in',
-        width: '100%',
-        height: '100%',
+        opacity: 0.2,
+        transition: 'transform 0.4s ease-out',
+        transform: 'scale(1, 1)',
+        zIndex: 100,
       },
     },
   },
@@ -69,9 +78,15 @@ const StyledTab = withStyles({
 export default function Navbar() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [animate, setAnimate] = useState(false);
+  const router = useRouter();
 
+  useEffect(() => {
+    setAnimate(true);
+  }, [router.pathname]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setAnimate(false);
   };
 
   return (
@@ -86,7 +101,9 @@ export default function Navbar() {
             onChange={handleChange}
             aria-label='simple tabs example'
             TabIndicatorProps={{ style: { display: 'none' } }}
-            classes={{ flexContainer: classes.flexContainer }}
+            classes={{
+              flexContainer: classes.flexContainer,
+            }}
           >
             <StyledTab
               component={Link}
@@ -95,7 +112,12 @@ export default function Navbar() {
               {...a11yProps(1)}
             />
 
-            <StyledTab label='KATEGORIE' {...a11yProps(3)} />
+            <StyledTab
+              component={Link}
+              href={'/kategorie'}
+              label='KATEGORIE'
+              {...a11yProps(3)}
+            />
             <StyledTab
               label='PHOTOSHOP'
               {...a11yProps(1)}
