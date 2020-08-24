@@ -1,4 +1,4 @@
-import { makeStyles, Tab, Tabs, withStyles } from '@material-ui/core';
+import { makeStyles, Tab, Tabs } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Link from '../../src/Link';
@@ -13,9 +13,8 @@ const useStyles = makeStyles((theme) => ({
   flexContainer: {
     height: '60px',
   },
-}));
-const StyledTab = withStyles({
-  root: {
+  tabHover: {
+    textDecoration: 'none',
     '&::after': {
       content: '""',
       backgroundColor: 'white',
@@ -38,7 +37,8 @@ const StyledTab = withStyles({
       },
     },
   },
-})(Tab);
+}));
+
 const DesktopTabs = () => {
   const classes = useStyles();
   const router = useRouter();
@@ -58,20 +58,28 @@ const DesktopTabs = () => {
           flexContainer: classes.flexContainer,
         }}
       >
-        <StyledTab component={Link} href={'/'} label='HOME' {...a11yProps(1)} />
+        <Tab
+          component={Link}
+          href={'/'}
+          label='HOME'
+          {...a11yProps(1)}
+          className={classes.tabHover}
+        />
 
-        <StyledTab
+        <Tab
           component={Link}
           href={'/kategorie'}
           label='KATEGORIE'
           {...a11yProps(3)}
+          className={classes.tabHover}
         />
 
-        <StyledTab
+        <Tab
           label='PHOTOSHOP'
           {...a11yProps(1)}
           component={Link}
           href={'/photoshop'}
+          className={classes.tabHover}
         />
       </Tabs>
     </>
