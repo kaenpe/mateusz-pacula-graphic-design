@@ -101,6 +101,7 @@ const Navbar = () => {
             <SideDrawer></SideDrawer>
           ) : (
             <Tabs
+              textColor='inherit'
               value={value}
               onChange={handleChange}
               aria-label='simple tabs example'
@@ -138,7 +139,6 @@ const Navbar = () => {
               <IconButton
                 classes={{ colorInherit: classes.colorInherit }}
                 color='inherit'
-                onClick={() => window.open('reddit.com', '_blank')}
               >
                 <InstagramIcon />
               </IconButton>
