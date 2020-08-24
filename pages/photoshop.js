@@ -21,7 +21,7 @@ const StyledImg = styled.div`
   width: 250px;
   height: 250px;
   z-index: 100;
-  background: url('/Figma_StyKj7D2Jy.png');
+  background: url('/Figma_StyKj7D2Jy 1figma.svg');
   border-radius: 45px;
   /* Figma_StyKj7D2Jy 1 */
 `;
