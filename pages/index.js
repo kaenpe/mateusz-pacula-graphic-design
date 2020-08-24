@@ -6,7 +6,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>Homepage</title>
+        <title>Home</title>
       </Head>
 
       <Home></Home>

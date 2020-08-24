@@ -118,6 +118,7 @@ export default function Navbar() {
               label='KATEGORIE'
               {...a11yProps(3)}
             />
+
             <StyledTab
               label='PHOTOSHOP'
               {...a11yProps(1)}
