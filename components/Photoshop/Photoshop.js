@@ -4,6 +4,8 @@ import styled from 'styled-components';
 const StyledWrapper = styled(motion.div)`
   width: 270px;
   height: 270px;
+  max-width: 50vw;
+  max-height: 50vh;
   grid-row: 2;
   grid-column: 2;
   position: relative;
@@ -13,18 +15,17 @@ const StyledWrapper = styled(motion.div)`
   border-radius: 45px;
   align-items: center;
   justify-content: center;
-  z-index: 201;
   &::after {
     content: '""';
-    width: 270px;
-    height: 270px;
+    width: 250px;
+    height: 250px;
     transition: all 0.3s ease-out;
     transform: scale(0.001, 0.001);
     border-radius: 45px;
-    position: absolute;
+    position: fixed;
     background-color: white;
-    z-index: 300;
-    opacity: 0.2;
+    z-index: 2;
+    opacity: 0.1;
   }
   &:hover {
     &::after {
@@ -35,22 +36,16 @@ const StyledWrapper = styled(motion.div)`
   }
 `;
 const StyledRectangle = styled(motion.img)`
-  width: 270px;
-  max-width: 70%;
-  max-height: 50%;
-  height: 270px;
   border-radius: 45px;
   position: absolute;
-  z-index: 200;
+  z-index: 1;
 `;
 const StyledPhotoshopLogo = styled(motion.img)`
-  width: 250px;
-  height: 250px;
   align-self: center;
   justify-self: center;
   border-radius: 45px;
   position: relative;
-  z-index: 200;
+  z-index: 1;
 `;
 const Photoshop = () => {
   return (

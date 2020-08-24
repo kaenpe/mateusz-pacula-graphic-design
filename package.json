@@ -4,6 +4,7 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.9.1",
+    "clsx": "^1.1.1",
     "framer-motion": "^2.4.3-beta.2",
     "next": "latest",
     "prop-types": "latest",

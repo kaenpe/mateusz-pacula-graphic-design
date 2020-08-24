@@ -15,6 +15,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Link from '../../src/Link';
+import SideDrawer from './SideDrawer';
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   positionFixed: {
-    zIndex: 100,
+    zIndex: 3,
   },
   offset: theme.mixins.toolbar,
 
@@ -76,9 +77,9 @@ const StyledTab = withStyles({
   },
 })(Tab);
 
-export default function Navbar() {
+const Navbar = () => {
   const classes = useStyles();
-  const matches = useMediaQuery('(min-width:600px)');
+  const matches = useMediaQuery('(max-width:600px)');
   const router = useRouter();
   const [value, setValue] = React.useState(router.pathname === '/' ? 0 : 1);
   const handleChange = (event, newValue) => {
@@ -92,36 +93,41 @@ export default function Navbar() {
         classes={{ positionFixed: classes.positionFixed }}
       >
         <Toolbar classes={{ regular: classes.regular }} disableGutters>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label='simple tabs example'
-            TabIndicatorProps={{ style: { display: 'none' } }}
-            classes={{
-              flexContainer: classes.flexContainer,
-            }}
-          >
-            <StyledTab
-              component={Link}
-              href={'/'}
-              label='HOME'
-              {...a11yProps(1)}
-            />
+          {matches ? (
+            <SideDrawer></SideDrawer>
+          ) : (
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label='simple tabs example'
+              TabIndicatorProps={{ style: { display: 'none' } }}
+              classes={{
+                flexContainer: classes.flexContainer,
+              }}
+            >
+              <StyledTab
+                component={Link}
+                href={'/'}
+                label='HOME'
+                {...a11yProps(1)}
+              />
 
-            <StyledTab
-              component={Link}
-              href={'/kategorie'}
-              label='KATEGORIE'
-              {...a11yProps(3)}
-            />
+              <StyledTab
+                component={Link}
+                href={'/kategorie'}
+                label='KATEGORIE'
+                {...a11yProps(3)}
+              />
 
-            <StyledTab
-              label='PHOTOSHOP'
-              {...a11yProps(1)}
-              component={Link}
-              href={'/photoshop'}
-            />
-          </Tabs>
+              <StyledTab
+                label='PHOTOSHOP'
+                {...a11yProps(1)}
+                component={Link}
+                href={'/photoshop'}
+              />
+            </Tabs>
+          )}
+
           <Box style={{ display: 'flex' }}>
             {' '}
             <MenuItem disableRipple classes={{ gutters: classes.gutters }}>
@@ -147,4 +153,5 @@ export default function Navbar() {
       <div className={classes.offset} />
     </>
   );
-}
+};
+export default Navbar;

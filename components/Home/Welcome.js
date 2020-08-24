@@ -19,7 +19,7 @@ const StyledWelcome = styled(motion.main)`
   justify-content: center;
   margin: 0 auto;
   position: fixed;
-  z-index: 101;
+  z-index: 999;
 `;
 const Welcome = () => {
   const { welcome, setWelcome } = useContext(WelcomeContext);
