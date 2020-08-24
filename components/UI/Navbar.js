@@ -12,7 +12,7 @@ import Tabs from '@material-ui/core/Tabs';
 import EmailIcon from '@material-ui/icons/Email';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from '../../src/Link';
 function a11yProps(index) {
   return {
@@ -77,16 +77,11 @@ const StyledTab = withStyles({
 
 export default function Navbar() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  const [animate, setAnimate] = useState(false);
-  const router = useRouter();
 
-  useEffect(() => {
-    setAnimate(true);
-  }, [router.pathname]);
+  const router = useRouter();
+  const [value, setValue] = React.useState(router.pathname === '/' ? 0 : 1);
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    setAnimate(false);
   };
 
   return (
@@ -97,6 +92,7 @@ export default function Navbar() {
       >
         <Toolbar classes={{ regular: classes.regular }} disableGutters>
           <Tabs
+            color='secondary'
             value={value}
             onChange={handleChange}
             aria-label='simple tabs example'
@@ -132,6 +128,7 @@ export default function Navbar() {
               <IconButton
                 classes={{ colorInherit: classes.colorInherit }}
                 color='inherit'
+                onClick={() => window.open('reddit.com', '_blank')}
               >
                 <InstagramIcon />
               </IconButton>
