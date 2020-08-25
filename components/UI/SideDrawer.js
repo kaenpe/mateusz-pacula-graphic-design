@@ -26,10 +26,12 @@ const StyledList = styled(List)`
   text-align: center;
 `;
 const StyledListItem = styled(ListItem)`
-  text-align: center;
-  text-decoration: none;
-  a {
+  && {
+    text-align: center;
     text-decoration: none;
+    a {
+      text-decoration: none;
+    }
   }
 `;
 const StyledDrawer = styled(Drawer)`

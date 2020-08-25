@@ -2,7 +2,6 @@ import { Tab, Tabs, useTheme } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Link from '../../src/Link';
 
 const StyledTabs = styled(Tabs)`
   && {
@@ -57,12 +56,7 @@ const DesktopTabs = () => {
           { label: 'KATEGORIE', href: '/kategorie' },
           { label: 'PHOTOSHOP', href: '/photoshop' },
         ].map(({ label, href }) => (
-          <StyledTab
-            component={Link}
-            label={label}
-            href={href}
-            key={label}
-          ></StyledTab>
+          <StyledTab label={label} key={label}></StyledTab>
         ))}
       </StyledTabs>
     </>
