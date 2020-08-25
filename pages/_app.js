@@ -4,7 +4,7 @@ import App from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 import Layout from '../components/UI/Layout';
-import Navbar from '../components/UI/Navbar';
+import StandaloneNavbar from '../components/UI/StandaloneNavbar';
 import DrawerContextProvider from '../contexts/DrawerContext';
 import WelcomeContextProvider from '../contexts/WelcomeContext';
 import theme from '../src/theme';
@@ -23,15 +23,21 @@ class MyApp extends App {
 
     return (
       <>
-        <Head></Head>
+        <Head>
+          {' '}
+          <meta
+            name='viewport'
+            content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no'
+          />
+        </Head>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <DrawerContextProvider>
             <WelcomeContextProvider>
               <Layout>
-                <Navbar></Navbar>
-
+                {/* <Navbar></Navbar> */}
+                <StandaloneNavbar></StandaloneNavbar>
                 <Component {...pageProps} />
               </Layout>
             </WelcomeContextProvider>

@@ -19,10 +19,19 @@ const StyledBackdrop = styled.div`
   opacity: 0.2;
 `;
 const Layout = ({ children }) => {
-  const { open, setOpen } = useContext(DrawerContext);
+  const {
+    openSideDrawer,
+    setOpenSideDrawer,
+    openCategoryDrawer,
+    setOpenCategoryDrawer,
+  } = useContext(DrawerContext);
   return (
     <StyledLayout>
-      {open && <StyledBackdrop onClick={() => setOpen(false)}></StyledBackdrop>}
+      {openSideDrawer && (
+        <StyledBackdrop
+          onClick={() => setOpenSideDrawer(false)}
+        ></StyledBackdrop>
+      )}
       {children}
     </StyledLayout>
   );

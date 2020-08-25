@@ -1,4 +1,4 @@
-import { Container, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 import Welcome from './Welcome';
@@ -13,11 +13,10 @@ const Home = () => {
   return (
     <>
       <Welcome></Welcome>
-      <Container maxWidth={false}>
-        <StyledHome>
-          <Typography variant='h1' color='secondary'></Typography>
-        </StyledHome>
-      </Container>
+
+      <StyledHome>
+        <Typography variant='h1' color='secondary'></Typography>
+      </StyledHome>
     </>
   );
 };
