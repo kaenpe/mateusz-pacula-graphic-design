@@ -56,7 +56,11 @@ const DesktopTabs = () => {
           { label: 'KATEGORIE', href: '/kategorie' },
           { label: 'PHOTOSHOP', href: '/photoshop' },
         ].map(({ label, href }) => (
-          <StyledTab label={label} key={label}></StyledTab>
+          <StyledTab
+            label={label}
+            key={label}
+            onClick={() => router.replace(href)}
+          ></StyledTab>
         ))}
       </StyledTabs>
     </>
