@@ -1,81 +1,52 @@
-import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
+import {
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Toolbar,
+} from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
-import clsx from 'clsx';
 import { useContext } from 'react';
+import styled from 'styled-components';
 import { DrawerContext } from '../../contexts/DrawerContext';
 import Link from '../../src/Link';
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    zIndex: 1000,
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'center',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-}));
-
+const drawerWidth = '240px';
+const StyledArrowWrap = styled.div`
+  display: flex;
+  align-items: center;
+  padding: ${({ theme }) => theme.spacing(0, 1)};
+  justify-content: center;
+`;
+const StyledList = styled(List)`
+  text-align: center;
+`;
+const StyledListItem = styled(ListItem)`
+  text-align: center;
+`;
+const StyledDrawer = styled(Drawer)`
+  && {
+    flex-shrink: 0;
+    .MuiDrawer-paper {
+      width: ${drawerWidth};
+    }
+  }
+`;
+const StyledToolbar = styled(Toolbar)``;
+const StyledHamburger = styled(IconButton)`
+  && {
+    margin-right: ${({ theme }) => theme.spacing(2)};
+    display: ${({ open }) => open && 'none'};
+  }
+`;
+const StyledArrowButton = styled(IconButton)``;
 const SideDrawer = () => {
-  const classes = useStyles();
-  const theme = useTheme();
   const { open, setOpen } = useContext(DrawerContext);
+  const theme = useTheme();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -87,34 +58,32 @@ const SideDrawer = () => {
 
   return (
     <>
-      <Toolbar>
-        <IconButton
+      <StyledToolbar>
+        <StyledHamburger
           color='inherit'
           aria-label='open drawer'
           onClick={handleDrawerOpen}
           edge='start'
-          className={clsx(classes.menuButton, open && classes.hide)}
+          open={open}
+          theme={theme}
         >
           <MenuIcon />
-        </IconButton>
-      </Toolbar>
+        </StyledHamburger>
+      </StyledToolbar>
 
-      <Drawer
-        className={classes.drawer}
+      <StyledDrawer
         variant='persistent'
         anchor='left'
         open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
+        width={drawerWidth}
       >
-        <List style={{ textAlign: 'center' }}>
+        <StyledList>
           {[
             { type: 'HOME', href: '/' },
             { type: 'KATEGORIE', href: '/kategorie' },
             { type: 'PHOTOSHOP', href: '/photoshop' },
           ].map(({ type, href }) => (
-            <ListItem
+            <StyledListItem
               button
               key={type}
               component={Link}
@@ -123,19 +92,19 @@ const SideDrawer = () => {
               style={{ textAlign: 'center' }}
             >
               <ListItemText primary={type} />
-            </ListItem>
+            </StyledListItem>
           ))}
-        </List>
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+        </StyledList>
+        <StyledArrowWrap theme={theme}>
+          <StyledArrowButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
             )}
-          </IconButton>
-        </div>
-      </Drawer>
+          </StyledArrowButton>
+        </StyledArrowWrap>
+      </StyledDrawer>
     </>
   );
 };
