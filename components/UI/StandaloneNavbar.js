@@ -1,4 +1,4 @@
-import { IconButton, MenuItem } from '@material-ui/core';
+import { IconButton, MenuItem, useMediaQuery } from '@material-ui/core';
 import { fade, useTheme } from '@material-ui/core/styles';
 import EmailIcon from '@material-ui/icons/Email';
 import InstagramIcon from '@material-ui/icons/Instagram';
@@ -38,10 +38,12 @@ const StyledIconButton = styled(IconButton)`
 
 const StandaloneNavbar = () => {
   const theme = useTheme();
+  const matches = useMediaQuery('(min-width:600px)');
 
   return (
     <Navigation theme={theme}>
-      <StandaloneDesktopTabs></StandaloneDesktopTabs>
+      {matches && <StandaloneDesktopTabs></StandaloneDesktopTabs>}
+
       <StyledFlexWrapper>
         {[1, 2].map((iteration) => (
           <StyledMenuItem disableRipple key={iteration}>

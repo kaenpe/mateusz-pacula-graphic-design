@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { DrawerContext } from '../../contexts/DrawerContext';
 import Link from '../../src/Link';
@@ -19,10 +19,6 @@ const StyledTab = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  a {
-    text-decoration: none;
-  }
   &::after {
     content: '';
     background-color: white;
@@ -35,7 +31,6 @@ const StyledTab = styled.div`
     z-index: 0;
   }
   &:hover {
-    text-decoration: none;
     &::after {
       opacity: 0.2;
       transition: transform 0.4s ease-out;
@@ -51,25 +46,44 @@ const StyledCategoryDrawer = styled(motion.div)`
   overflow-y: hidden;
   background-color: ${({ theme }) => theme.palette.primary.main};
 `;
-const variants = {
-  shrinked: { height: '60px' },
-  expanded: { height: '360px' },
-};
 
 const StandaloneDesktopTabs = () => {
   const { openCategoryDrawer, setOpenCategoryDrawer } = useContext(
     DrawerContext
   );
-  const toggleCategoryTabsHandler = () => {
+
+  const [currentCategory, setCurrentCategory] = useState('KATEGORIE');
+
+  const toggleCategoryDrawerHandler = () => {
     setOpenCategoryDrawer((prevState) => !prevState);
   };
+
+  const closeCategoryDrawerHandler = () => {
+    setOpenCategoryDrawer(false);
+  };
   const router = useRouter();
+  const variants = {
+    shrinked: { height: '60px' },
+    expanded: {
+      height: router.pathname === '/' ? '360px' : '300px',
+    },
+  };
+  useEffect(() => {
+    setCurrentCategory(
+      router.pathname === '/' ? 'KATEGORIE' : router.query.slug
+    );
+  }, [router.query.slug, router.pathname]);
   const theme = useTheme();
+
   return (
     <>
       <StyledFlexWrapper>
         <Link style={{ textDecoration: 'none' }} href={'/'}>
-          <StyledTab theme={theme} active={router.pathname === '/'}>
+          <StyledTab
+            onClick={() => closeCategoryDrawerHandler()}
+            theme={theme}
+            active={router.pathname === '/'}
+          >
             <Typography variant='button'>HOME</Typography>
           </StyledTab>
         </Link>
@@ -83,33 +97,36 @@ const StandaloneDesktopTabs = () => {
           <div>
             <StyledTab
               theme={theme}
-              active={router.pathname === '/kategorie'}
-              onClick={() => toggleCategoryTabsHandler()}
+              active={router.pathname === '/kategorie/[slug]'}
+              onClick={() => toggleCategoryDrawerHandler()}
             >
-              <Typography variant='button'>KATEGORIE </Typography>
+              <Typography variant='button'>{currentCategory} </Typography>
             </StyledTab>
           </div>
 
           {[
-            { type: 'MINIATURKI', href: '/miniaturki' },
-            { type: 'BANERY', href: '/banery' },
-            { type: 'TAPETY', href: '/tapety' },
-            { type: 'BEFORE/AFTER', href: '/beforeafter' },
-            { type: 'PHOTOSHOP', href: '/photoshop' },
-          ].map(({ type, href }) => {
-            return (
-              <Link href={href}>
-                <StyledTab
-                  key={type}
-                  theme={theme}
-                  active={router.pathname === { href }}
-                  onClick={() => toggleCategoryTabsHandler()}
-                >
-                  <Typography variant='button'>{type} </Typography>
-                </StyledTab>
-              </Link>
-            );
-          })}
+            { name: 'miniaturki', href: '/kategorie/miniaturki' },
+            { name: 'banery', href: '/kategorie/banery' },
+            { name: 'tapety', href: '/kategorie/tapety' },
+            { name: 'before after', href: '/kategorie/before after' },
+            { name: 'photoshop', href: '/kategorie/photoshop' },
+          ]
+            .filter(({ name }) => name !== router.query.slug)
+            .map(({ name, href }) => {
+              return (
+                <Link href={'/kategorie/[slug]'} as={href} key={name}>
+                  <StyledTab
+                    key={name}
+                    theme={theme}
+                    onClick={() => closeCategoryDrawerHandler()}
+                  >
+                    <Typography variant='button'>
+                      {name.toUpperCase()}
+                    </Typography>
+                  </StyledTab>
+                </Link>
+              );
+            })}
         </StyledCategoryDrawer>
       </StyledFlexWrapper>
     </>

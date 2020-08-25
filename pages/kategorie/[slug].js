@@ -1,7 +1,7 @@
 import React from 'react';
 
-const tapety = () => {
+const kategoria = () => {
   return <div></div>;
 };
 
-export default tapety;
+export default kategoria;
