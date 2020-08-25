@@ -27,6 +27,10 @@ const StyledList = styled(List)`
 `;
 const StyledListItem = styled(ListItem)`
   text-align: center;
+  text-decoration: none;
+  a {
+    text-decoration: none;
+  }
 `;
 const StyledDrawer = styled(Drawer)`
   && {
@@ -89,7 +93,6 @@ const SideDrawer = () => {
               component={Link}
               href={href}
               onClick={handleDrawerClose}
-              style={{ textAlign: 'center' }}
             >
               <ListItemText primary={type} />
             </StyledListItem>

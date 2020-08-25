@@ -1,4 +1,4 @@
-import { Tab, Tabs } from '@material-ui/core';
+import { Tab, Tabs, useTheme } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -6,6 +6,7 @@ import Link from '../../src/Link';
 
 const StyledTabs = styled(Tabs)`
   && {
+    color: ${({ theme }) => theme.palette.secondary.light};
     .MuiTabs-flexContainer {
       height: 60px;
     }
@@ -14,7 +15,7 @@ const StyledTabs = styled(Tabs)`
 const StyledTab = styled(Tab)`
   && {
     &::after {
-      content: '""';
+      content: '';
       background-color: white;
       transition: transform 0.4s ease-out;
       width: 100%;
@@ -37,6 +38,7 @@ const StyledTab = styled(Tab)`
   }
 `;
 const DesktopTabs = () => {
+  const theme = useTheme();
   const router = useRouter();
   const [value, setValue] = useState(router.pathname === '/' ? 0 : 1);
   const handleChange = (event, newValue) => {
@@ -45,6 +47,7 @@ const DesktopTabs = () => {
   return (
     <>
       <StyledTabs
+        theme={theme}
         value={value}
         onChange={handleChange}
         TabIndicatorProps={{ style: { display: 'none' } }}
