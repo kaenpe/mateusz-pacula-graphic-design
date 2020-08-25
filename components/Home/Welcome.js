@@ -21,6 +21,13 @@ const StyledWelcome = styled(motion.main)`
   position: fixed;
   z-index: 999;
 `;
+const StyledButton = styled(Button)`
+  && {
+    margin: 0 auto;
+    border-radius: 10px;
+    z-index: 10;
+  }
+`;
 const Welcome = () => {
   const { welcome, setWelcome } = useContext(WelcomeContext);
   return (
@@ -52,18 +59,13 @@ const Welcome = () => {
                 whileTap={{ scale: 0.8, transition: { duration: 1 } }}
               >
                 {' '}
-                <Button
+                <StyledButton
                   variant='contained'
                   color='primary'
-                  style={{
-                    margin: '0 auto',
-                    borderRadius: '10px',
-                    zIndex: '101',
-                  }}
                   onClick={() => setWelcome((prevState) => !prevState)}
                 >
                   <strong>PORTFOLIO</strong>
-                </Button>
+                </StyledButton>
               </motion.div>
             </StyledVoxelLogo>
           </StyledWelcome>

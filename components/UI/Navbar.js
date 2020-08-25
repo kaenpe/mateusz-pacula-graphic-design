@@ -6,69 +6,72 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade } from '@material-ui/core/styles';
 import EmailIcon from '@material-ui/icons/Email';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import React from 'react';
+import styled from 'styled-components';
+import theme from '../../src/theme';
 import DesktopTabs from './DesktopTabs';
 import SideDrawer from './SideDrawer';
 
-const useStyles = makeStyles((theme) => ({
-  positionFixed: {
-    zIndex: 3,
-    transition: theme.transitions.create(['margin', 'width'], {
+const StyledAppBar = styled(AppBar)`
+  && {
+    z-index: 3;
+    transition: ${theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  offset: theme.mixins.toolbar,
-  colorInherit: {
-    '&:hover': {
-      backgroundColor: fade(theme.palette.secondary.main, 0.25),
-    },
-  },
-  gutters: {
-    '&:hover': {
-      backgroundColor: 'transparent',
-    },
-  },
-  regular: { justifyContent: 'space-between', minHeight: 'auto' },
-}));
+    })};
+  }
+`;
+const StyledToolbar = styled(Toolbar)`
+  && {
+    justify-content: space-between;
+    min-height: auto;
+  }
+`;
+const StyledMenuItem = styled(MenuItem)`
+  && {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+`;
+const StyledIconButton = styled(IconButton)`
+  && {
+    &:hover {
+      background-color: ${fade(theme.palette.secondary.main, 0.25)};
+    }
+  }
+`;
+const StyledOffset = styled.div`
+  offset: ${theme.mixins.toolbar};
+`;
 
 const Navbar = () => {
-  const classes = useStyles();
   const matches = useMediaQuery('(max-width:600px)');
 
   return (
     <>
-      <AppBar
-        position='fixed'
-        classes={{ positionFixed: classes.positionFixed }}
-      >
-        <Toolbar classes={{ regular: classes.regular }} disableGutters>
+      <StyledAppBar position='fixed'>
+        <StyledToolbar disableGutters>
           {matches ? <SideDrawer></SideDrawer> : <DesktopTabs></DesktopTabs>}
           <Box style={{ display: 'flex' }}>
             {' '}
-            <MenuItem disableRipple classes={{ gutters: classes.gutters }}>
-              <IconButton
-                classes={{ colorInherit: classes.colorInherit }}
-                color='inherit'
-              >
+            <StyledMenuItem disableRipple>
+              <StyledIconButton color='inherit'>
                 <InstagramIcon />
-              </IconButton>
-            </MenuItem>
-            <MenuItem disableRipple classes={{ gutters: classes.gutters }}>
-              <IconButton
-                classes={{ colorInherit: classes.colorInherit }}
-                color='inherit'
-              >
+              </StyledIconButton>
+            </StyledMenuItem>
+            <StyledMenuItem disableRipple>
+              <StyledIconButton color='inherit'>
                 <EmailIcon />
-              </IconButton>
-            </MenuItem>
+              </StyledIconButton>
+            </StyledMenuItem>
           </Box>
-        </Toolbar>
-      </AppBar>
-      <div className={classes.offset} />
+        </StyledToolbar>
+      </StyledAppBar>
+      <StyledOffset />
     </>
   );
 };
