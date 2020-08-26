@@ -8,8 +8,7 @@ import SideDrawer from './SideDrawer';
 //styled
 const Navigation = styled.nav`
   position: fixed;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   justify-content: space-between;
   height: 60px;
   width: 100vw;
@@ -19,8 +18,7 @@ export const StyledFlexWrapper = styled.div`
   display: flex;
   justify-content: ${({ tabs, logo, hamburger, icons }) =>
     tabs || hamburger ? 'flex-start' : logo ? 'center' : icons && 'flex-end'};
-  grid-column: ${({ tabs, logo, hamburger, icons }) =>
-    tabs || hamburger ? 1 : logo ? 2 : icons && 3};
+  width: 420px;
   align-items: flex-start;
   position: relative;
 
@@ -72,6 +70,7 @@ const Navbar = () => {
             </StyledIconButton>
           </StyledMenuItem>
         ))}
+        <div></div>
       </StyledFlexWrapper>
     </Navigation>
   );
