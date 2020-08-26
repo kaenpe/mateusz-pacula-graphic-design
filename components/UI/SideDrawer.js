@@ -9,8 +9,8 @@ import styled from 'styled-components';
 import { CategoryContext } from '../../contexts/CategoryContext';
 import { DrawerContext } from '../../contexts/DrawerContext';
 import Link from '../../src/Link';
-import { StyledTab } from './StandaloneDesktopTabs';
-import { StyledFlexWrapper, StyledMenuItem } from './StandaloneNavbar';
+import { StyledTab } from './DesktopTabs';
+import { StyledFlexWrapper, StyledMenuItem } from './Navbar';
 //styled-components
 const StyledHamburger = styled(IconButton)`
   && {
@@ -75,7 +75,7 @@ const StyledArrowButton = styled(IconButton)`
   }
 `;
 //
-const StandaloneSideDrawer = () => {
+const SideDrawer = () => {
   //variables
   const theme = useTheme();
   const router = useRouter();
@@ -196,4 +196,4 @@ const StandaloneSideDrawer = () => {
   );
 };
 
-export default StandaloneSideDrawer;
+export default SideDrawer;

@@ -4,7 +4,7 @@ import App from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 import Layout from '../components/UI/Layout';
-import StandaloneNavbar from '../components/UI/StandaloneNavbar';
+import Navbar from '../components/UI/Navbar';
 import CategoryContextProvider from '../contexts/CategoryContext';
 import DrawerContextProvider from '../contexts/DrawerContext';
 import WelcomeContextProvider from '../contexts/WelcomeContext';
@@ -38,7 +38,7 @@ class MyApp extends App {
             <DrawerContextProvider>
               <WelcomeContextProvider>
                 <Layout>
-                  <StandaloneNavbar></StandaloneNavbar>
+                  <Navbar></Navbar>
                   <Component {...pageProps} />
                 </Layout>
               </WelcomeContextProvider>

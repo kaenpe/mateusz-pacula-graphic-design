@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { CategoryContext } from '../../contexts/CategoryContext';
 import { DrawerContext } from '../../contexts/DrawerContext';
 import Link from '../../src/Link';
-import { StyledFlexWrapper } from './StandaloneNavbar';
+import { StyledFlexWrapper } from './Navbar';
 
 //styled
 export const StyledTab = styled(motion.div)`
@@ -50,7 +50,7 @@ export const StyledCategoryDrawer = styled(motion.div)`
   background-color: ${({ theme }) => theme.palette.primary.main};
 `;
 //
-const StandaloneDesktopTabs = () => {
+const DesktopTabs = () => {
   //vars
   const router = useRouter();
   const variants = {
@@ -144,4 +144,4 @@ const StandaloneDesktopTabs = () => {
   );
 };
 
-export default StandaloneDesktopTabs;
+export default DesktopTabs;

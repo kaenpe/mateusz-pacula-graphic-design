@@ -3,8 +3,8 @@ import { fade, useTheme } from '@material-ui/core/styles';
 import EmailIcon from '@material-ui/icons/Email';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import styled from 'styled-components';
-import StandaloneDesktopTabs from './StandaloneDesktopTabs';
-import StandaloneSideDrawer from './StandaloneSideDrawer';
+import DesktopTabs from './DesktopTabs';
+import SideDrawer from './SideDrawer';
 //styled
 const Navigation = styled.nav`
   position: fixed;
@@ -38,7 +38,7 @@ export const StyledIconButton = styled(IconButton)`
   }
 `;
 //
-const StandaloneNavbar = () => {
+const Navbar = () => {
   //variables
   const theme = useTheme();
   const matches = useMediaQuery('(min-width:600px)');
@@ -52,11 +52,7 @@ const StandaloneNavbar = () => {
 
   return (
     <Navigation theme={theme}>
-      {matches ? (
-        <StandaloneDesktopTabs></StandaloneDesktopTabs>
-      ) : (
-        <StandaloneSideDrawer></StandaloneSideDrawer>
-      )}
+      {matches ? <DesktopTabs></DesktopTabs> : <SideDrawer></SideDrawer>}
 
       <StyledFlexWrapper>
         {[1, 2].map((iteration) => (
@@ -75,4 +71,4 @@ const StandaloneNavbar = () => {
   );
 };
 
-export default StandaloneNavbar;
+export default Navbar;
