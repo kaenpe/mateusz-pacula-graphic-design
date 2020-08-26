@@ -49,6 +49,15 @@ export const StyledCategoryDrawer = styled(motion.div)`
   overflow-y: hidden;
   background-color: ${({ theme }) => theme.palette.primary.main};
 `;
+const StyledImgTab = styled.div`
+  width: 140px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+`;
 //
 const DesktopTabs = () => {
   //vars
@@ -71,76 +80,69 @@ const DesktopTabs = () => {
   //
 
   //functions
-  const toggleCategoryDrawerHandler = () => {
-    setOpenCategoryDrawer((prevState) => !prevState);
+  const openCategoryDrawerHandler = () => {
+    setOpenCategoryDrawer(true);
   };
   //
-  const closeCategoryDrawerHandler = () => {
-    setOpenCategoryDrawer(false);
-  };
+
   //effects
 
   //
   return (
-    <StyledFlexWrapper>
-      <Link href={'/'}>
-        <StyledTab
-          onClick={() => closeCategoryDrawerHandler()}
-          theme={theme}
-          active={router.pathname === '/'}
-        >
-          <Typography variant='button'>HOME</Typography>
-        </StyledTab>
-      </Link>
-
-      <StyledCategoryDrawer
-        theme={theme}
-        variants={variants}
-        animate={openCategoryDrawer ? 'expanded' : 'shrinked'}
-        transition={{ duration: 0.5 }}
-      >
-        <div>
-          <StyledTab
-            theme={theme}
-            active={router.pathname === '/kategorie/[slug]'}
-            onClick={() => toggleCategoryDrawerHandler()}
-          >
-            <Typography variant='button'>{category} </Typography>
+    <>
+      <StyledFlexWrapper>
+        <Link href={'/'}>
+          <StyledTab theme={theme} active={router.pathname === '/'}>
+            <Typography variant='button'>HOME</Typography>
           </StyledTab>
-        </div>
+        </Link>
 
-        {[
-          { name: 'banery', href: '/kategorie/banery' },
-          { name: 'before after', href: '/kategorie/before after' },
-          { name: 'miniaturki', href: '/kategorie/miniaturki' },
-          { name: 'photoshop', href: '/kategorie/photoshop' },
-          { name: 'tapety', href: '/kategorie/tapety' },
-        ]
-          .filter(({ name }) => name !== slug)
-          .map(({ name, href }) => {
-            return (
-              <Link href={'/kategorie/[slug]'} as={href} key={name}>
-                <StyledTab
-                  key={name}
-                  theme={theme}
-                  onClick={() => closeCategoryDrawerHandler()}
-                >
-                  <Typography variant='button'>{name.toUpperCase()}</Typography>
-                </StyledTab>
-              </Link>
-            );
-          })}
-      </StyledCategoryDrawer>
-      <Link href={'/kontakt'}>
-        <StyledTab
-          active={router.pathname === '/kontakt'}
+        <StyledCategoryDrawer
           theme={theme}
-          onClick={() => closeCategoryDrawerHandler()}
+          variants={variants}
+          animate={openCategoryDrawer ? 'expanded' : 'shrinked'}
+          transition={{ duration: 0.5 }}
         >
-          <Typography variant='button'>KONTAKT</Typography>
-        </StyledTab>
-      </Link>
-    </StyledFlexWrapper>
+          <div>
+            <StyledTab
+              theme={theme}
+              active={router.pathname === '/kategorie/[slug]'}
+              onClick={() => openCategoryDrawerHandler()}
+            >
+              <Typography variant='button'>{category} </Typography>
+            </StyledTab>
+          </div>
+
+          {['banery', 'before after', 'miniatury', 'photoshop', 'tapety']
+            .filter((name) => name !== slug)
+            .map((name) => {
+              return (
+                <Link
+                  href={'/kategorie/[slug]'}
+                  as={`/kategorie/${name}`}
+                  key={name}
+                >
+                  <StyledTab key={name} theme={theme}>
+                    <Typography variant='button'>
+                      {name.toUpperCase()}
+                    </Typography>
+                  </StyledTab>
+                </Link>
+              );
+            })}
+        </StyledCategoryDrawer>
+        <Link href={'/kontakt'}>
+          <StyledTab active={router.pathname === '/kontakt'} theme={theme}>
+            <Typography variant='button'>KONTAKT</Typography>
+          </StyledTab>
+        </Link>
+      </StyledFlexWrapper>
+      <StyledFlexWrapper>
+        <StyledImgTab theme={theme}>
+          <img src='/bialelogo.png' alt='bialelogo' />
+        </StyledImgTab>
+      </StyledFlexWrapper>
+    </>
   );
 };
 

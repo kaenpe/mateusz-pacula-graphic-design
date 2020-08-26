@@ -54,7 +54,13 @@ const Navbar = () => {
     <Navigation theme={theme}>
       {matches ? <DesktopTabs></DesktopTabs> : <SideDrawer></SideDrawer>}
 
-      <StyledFlexWrapper>
+      <StyledFlexWrapper
+        style={{
+          width: '420px',
+          justifyContent: 'flex-end',
+          cursor: 'default',
+        }}
+      >
         {[1, 2].map((iteration) => (
           <StyledMenuItem disableRipple key={iteration}>
             <StyledIconButton color='secondary' theme={theme}>

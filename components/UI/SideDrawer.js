@@ -1,6 +1,5 @@
 import { IconButton, Typography } from '@material-ui/core';
 import { fade, useTheme } from '@material-ui/core/styles';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MenuIcon from '@material-ui/icons/Menu';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
@@ -55,24 +54,16 @@ const StyledSideDrawerTab = styled(StyledTab)`
   }
 `;
 const StyledArrowWrap = styled.div`
-  width: 100%;
+  width: 40vw;
   height: 100%;
   color: ${({ theme }) => theme.palette.secondary.light};
   background-color: ${({ theme }) => theme.palette.primary.main};
   display: flex;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing(0, 1)};
+
   justify-content: center;
 `;
-const StyledArrowButton = styled(IconButton)`
-  && {
-    color: ${({ theme }) => theme.palette.secondary.dark};
-    &:hover {
-      background-color: ${({ theme }) =>
-        fade(theme.palette.secondary.main, 0.25)};
-    }
-  }
-`;
+
 //
 const SideDrawer = () => {
   //variables
@@ -145,27 +136,27 @@ const SideDrawer = () => {
               </StyledSideDrawerTab>
             </Link>
 
-            {[
-              { name: 'banery', href: '/kategorie/banery' },
-              { name: 'before after', href: '/kategorie/before after' },
-              { name: 'miniaturki', href: '/kategorie/miniaturki' },
-              { name: 'photoshop', href: '/kategorie/photoshop' },
-              { name: 'tapety', href: '/kategorie/tapety' },
-            ].map(({ name, href }) => {
-              return (
-                <Link href={'/kategorie/[slug]'} as={href} key={name}>
-                  <StyledSideDrawerTab
+            {['banery', 'before after', 'miniatury', 'photoshop', 'tapety'].map(
+              (name) => {
+                return (
+                  <Link
+                    href={'/kategorie/[slug]'}
+                    as={`/kategorie/${name}`}
                     key={name}
-                    theme={theme}
-                    active={category === name}
                   >
-                    <Typography variant='button'>
-                      {name.toUpperCase()}
-                    </Typography>
-                  </StyledSideDrawerTab>
-                </Link>
-              );
-            })}
+                    <StyledSideDrawerTab
+                      key={name}
+                      theme={theme}
+                      active={category === name}
+                    >
+                      <Typography variant='button'>
+                        {name.toUpperCase()}
+                      </Typography>
+                    </StyledSideDrawerTab>
+                  </Link>
+                );
+              }
+            )}
 
             <Link href={'/kontakt'}>
               <StyledSideDrawerTab
@@ -176,12 +167,7 @@ const SideDrawer = () => {
               </StyledSideDrawerTab>
             </Link>
             <StyledArrowWrap theme={theme}>
-              <StyledArrowButton
-                theme={theme}
-                onClick={() => closeSideDrawerHandler()}
-              >
-                <ChevronLeftIcon />
-              </StyledArrowButton>
+              <img src='/bialelogo.png'></img>
             </StyledArrowWrap>
           </StyledSideDrawer>
         )}

@@ -1,5 +1,6 @@
-import React from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { DrawerContext } from '../../contexts/DrawerContext';
 const StyledLayout = styled.div`
   width: 100vw;
   height: 100vh;
@@ -9,7 +10,24 @@ const StyledLayout = styled.div`
 `;
 
 const Layout = ({ children }) => {
-  return <StyledLayout>{children}</StyledLayout>;
+  //states
+  const { openCategoryDrawer, setOpenCategoryDrawer } = useContext(
+    DrawerContext
+  );
+  //
+  //functions
+  const closeCategoryHandler = () => {
+    return openCategoryDrawer ? setOpenCategoryDrawer(false) : null;
+  };
+  //
+  //effects
+
+  //
+  return (
+    <StyledLayout onClick={() => closeCategoryHandler()}>
+      {children}
+    </StyledLayout>
+  );
 };
 
 export default Layout;
