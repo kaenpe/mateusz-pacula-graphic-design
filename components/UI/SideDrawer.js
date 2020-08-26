@@ -67,7 +67,6 @@ const StyledArrowWrap = styled.div`
 const StyledArrowButton = styled(IconButton)`
   && {
     color: ${({ theme }) => theme.palette.secondary.dark};
-    padding: 0;
     &:hover {
       background-color: ${({ theme }) =>
         fade(theme.palette.secondary.main, 0.25)};
@@ -137,7 +136,7 @@ const SideDrawer = () => {
             theme={theme}
             key='sidedrawer'
           >
-            <Link style={{ textDecoration: 'none' }} href={'/'}>
+            <Link href={'/'}>
               <StyledSideDrawerTab
                 theme={theme}
                 active={router.pathname === '/'}
@@ -154,12 +153,7 @@ const SideDrawer = () => {
               { name: 'tapety', href: '/kategorie/tapety' },
             ].map(({ name, href }) => {
               return (
-                <Link
-                  style={{ textDecoration: 'none' }}
-                  href={'/kategorie/[slug]'}
-                  as={href}
-                  key={name}
-                >
+                <Link href={'/kategorie/[slug]'} as={href} key={name}>
                   <StyledSideDrawerTab
                     key={name}
                     theme={theme}
@@ -173,7 +167,7 @@ const SideDrawer = () => {
               );
             })}
 
-            <Link style={{ textDecoration: 'none' }} href={'/kontakt'}>
+            <Link href={'/kontakt'}>
               <StyledSideDrawerTab
                 theme={theme}
                 active={category === 'kontakt'}

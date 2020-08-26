@@ -72,5 +72,5 @@ Link.defaultProps = {
 const RouterLink = withRouter(Link);
 
 export default React.forwardRef((props, ref) => (
-  <RouterLink {...props} innerRef={ref} />
+  <RouterLink {...props} style={{ textDecoration: 'none' }} innerRef={ref} />
 ));

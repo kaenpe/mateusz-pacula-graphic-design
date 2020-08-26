@@ -83,7 +83,7 @@ const DesktopTabs = () => {
   //
   return (
     <StyledFlexWrapper>
-      <Link style={{ textDecoration: 'none' }} href={'/'}>
+      <Link href={'/'}>
         <StyledTab
           onClick={() => closeCategoryDrawerHandler()}
           theme={theme}
