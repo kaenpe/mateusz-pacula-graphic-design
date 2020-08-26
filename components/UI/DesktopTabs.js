@@ -58,6 +58,8 @@ const StyledImgTab = styled.div`
   justify-content: center;
   cursor: default;
 `;
+
+const StyledLogo = styled.img``;
 //
 const DesktopTabs = () => {
   //vars
@@ -139,7 +141,7 @@ const DesktopTabs = () => {
       </StyledFlexWrapper>
       <StyledFlexWrapper logo>
         <StyledImgTab theme={theme}>
-          <img src='/bialelogo.png' alt='bialelogo' />
+          <StyledLogo src='/bialelogo 1.svg' alt='bialelogo' />
         </StyledImgTab>
       </StyledFlexWrapper>
     </>
