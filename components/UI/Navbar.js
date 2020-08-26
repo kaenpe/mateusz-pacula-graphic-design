@@ -8,7 +8,8 @@ import SideDrawer from './SideDrawer';
 //styled
 const Navigation = styled.nav`
   position: fixed;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
   height: 60px;
   width: 100vw;
@@ -16,8 +17,13 @@ const Navigation = styled.nav`
 `;
 export const StyledFlexWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: ${({ tabs, logo, hamburger, icons }) =>
+    tabs || hamburger ? 'flex-start' : logo ? 'center' : icons && 'flex-end'};
+  grid-column: ${({ tabs, logo, hamburger, icons }) =>
+    tabs || hamburger ? 1 : logo ? 2 : icons && 3};
+  align-items: flex-start;
   position: relative;
+
   &:hover {
     cursor: pointer;
   }
@@ -41,7 +47,7 @@ export const StyledIconButton = styled(IconButton)`
 const Navbar = () => {
   //variables
   const theme = useTheme();
-  const matches = useMediaQuery('(min-width:600px)');
+  const matches = useMediaQuery('(min-width:730px)');
   //
   //states
   //
@@ -54,13 +60,7 @@ const Navbar = () => {
     <Navigation theme={theme}>
       {matches ? <DesktopTabs></DesktopTabs> : <SideDrawer></SideDrawer>}
 
-      <StyledFlexWrapper
-        style={{
-          width: '420px',
-          justifyContent: 'flex-end',
-          cursor: 'default',
-        }}
-      >
+      <StyledFlexWrapper icons>
         {[1, 2].map((iteration) => (
           <StyledMenuItem disableRipple key={iteration}>
             <StyledIconButton color='secondary' theme={theme}>

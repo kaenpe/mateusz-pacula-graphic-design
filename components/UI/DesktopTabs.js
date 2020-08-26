@@ -90,7 +90,7 @@ const DesktopTabs = () => {
   //
   return (
     <>
-      <StyledFlexWrapper>
+      <StyledFlexWrapper tabs>
         <Link href={'/'}>
           <StyledTab theme={theme} active={router.pathname === '/'}>
             <Typography variant='button'>HOME</Typography>
@@ -137,7 +137,7 @@ const DesktopTabs = () => {
           </StyledTab>
         </Link>
       </StyledFlexWrapper>
-      <StyledFlexWrapper>
+      <StyledFlexWrapper logo>
         <StyledImgTab theme={theme}>
           <img src='/bialelogo.png' alt='bialelogo' />
         </StyledImgTab>

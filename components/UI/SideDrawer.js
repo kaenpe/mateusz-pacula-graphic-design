@@ -28,7 +28,7 @@ const StyledSideDrawer = styled(motion.div)`
   height: 100vh;
   z-index: 3;
   display: grid;
-  grid-auto-rows: minmax(60px, auto);
+  grid-auto-rows: auto;
   overflow-x: hidden;
   white-space: nowrap;
 `;
@@ -53,15 +53,18 @@ const StyledSideDrawerTab = styled(StyledTab)`
     background-color: ${({ theme }) => fade(theme.palette.primary.light, 0.4)};
   }
 `;
-const StyledArrowWrap = styled.div`
-  width: 40vw;
+const StyledLogoWrapper = styled.div`
+  width: 100%;
   height: 100%;
   color: ${({ theme }) => theme.palette.secondary.light};
   background-color: ${({ theme }) => theme.palette.primary.main};
   display: flex;
   align-items: center;
-
   justify-content: center;
+`;
+
+const StyledLogo = styled.img`
+  width: 50vw;
 `;
 
 //
@@ -69,12 +72,6 @@ const SideDrawer = () => {
   //variables
   const theme = useTheme();
   const router = useRouter();
-  const variants = {
-    shrinked: { height: '60px' },
-    expanded: {
-      height: '360px',
-    },
-  };
 
   //
 
@@ -97,7 +94,7 @@ const SideDrawer = () => {
   //
   return (
     <>
-      <StyledFlexWrapper>
+      <StyledFlexWrapper hamburger>
         {' '}
         <StyledMenuItem>
           <StyledHamburger
@@ -122,7 +119,7 @@ const SideDrawer = () => {
           <StyledSideDrawer
             transition={{ duration: 0.5 }}
             initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: '40vw' }}
+            animate={{ opacity: 1, width: '50vw' }}
             exit={{ opacity: 0, width: 0 }}
             theme={theme}
             key='sidedrawer'
@@ -166,9 +163,9 @@ const SideDrawer = () => {
                 <Typography variant='button'>KONTAKT</Typography>
               </StyledSideDrawerTab>
             </Link>
-            <StyledArrowWrap theme={theme}>
-              <img src='/bialelogo.png'></img>
-            </StyledArrowWrap>
+            <StyledLogoWrapper theme={theme}>
+              <StyledLogo src='/bialelogo.png' alt='navlogo'></StyledLogo>
+            </StyledLogoWrapper>
           </StyledSideDrawer>
         )}
       </AnimatePresence>
