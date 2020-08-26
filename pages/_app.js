@@ -38,7 +38,6 @@ class MyApp extends App {
             <DrawerContextProvider>
               <WelcomeContextProvider>
                 <Layout>
-                  {/* <Navbar></Navbar> */}
                   <StandaloneNavbar></StandaloneNavbar>
                   <Component {...pageProps} />
                 </Layout>

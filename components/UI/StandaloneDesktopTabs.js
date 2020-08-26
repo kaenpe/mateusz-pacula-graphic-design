@@ -56,7 +56,7 @@ const StandaloneDesktopTabs = () => {
   const variants = {
     shrinked: { height: '60px' },
     expanded: {
-      height: router.pathname === ('/' || '/kontakt') ? '360px' : '300px',
+      height: router.pathname !== '/kategorie/[slug]' ? '360px' : '300px',
     },
   };
   const theme = useTheme();

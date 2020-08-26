@@ -6,7 +6,7 @@ export const CategoryProvider = ({ children }) => {
   const [category, setCategory] = useState('KATEGORIE');
   const { slug } = router.query;
   useEffect(() => {
-    setCategory(router.pathname === ('/' || '/kontakt/') ? 'KATEGORIE' : slug);
+    setCategory(router.pathname !== '/kategorie/[slug]' ? 'KATEGORIE' : slug);
   }, [slug, router.pathname]);
 
   const value = { category, setCategory };

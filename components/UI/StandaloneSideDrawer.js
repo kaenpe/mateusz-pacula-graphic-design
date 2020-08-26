@@ -24,13 +24,14 @@ const StyledHamburger = styled(IconButton)`
   }
 `;
 const StyledSideDrawer = styled(motion.div)`
-  width: 45vw;
   background-color: ${({ theme }) => theme.palette.secondary.dark};
   position: absolute;
   height: 100vh;
   z-index: 3;
   display: grid;
-  grid-auto-rows: auto;
+  grid-auto-rows: minmax(60px, auto);
+  overflow-x: hidden;
+  white-space: nowrap;
 `;
 const StyledBackdrop = styled.div`
   width: 100vw;
@@ -56,16 +57,23 @@ const StyledSideDrawerTab = styled(StyledTab)`
 const StyledArrowWrap = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${({ theme, active }) =>
-    active
-      ? fade(theme.palette.primary.dark, 0.5)
-      : theme.palette.primary.main};
+  color: ${({ theme }) => theme.palette.secondary.light};
+  background-color: ${({ theme }) => theme.palette.primary.main};
   display: flex;
   align-items: center;
   padding: ${({ theme }) => theme.spacing(0, 1)};
   justify-content: center;
 `;
-const StyledArrowButton = styled(IconButton)``;
+const StyledArrowButton = styled(IconButton)`
+  && {
+    color: ${({ theme }) => theme.palette.secondary.dark};
+    padding: 0;
+    &:hover {
+      background-color: ${({ theme }) =>
+        fade(theme.palette.secondary.main, 0.25)};
+    }
+  }
+`;
 //
 const StandaloneSideDrawer = () => {
   //variables
@@ -77,7 +85,7 @@ const StandaloneSideDrawer = () => {
       height: '360px',
     },
   };
-  const { slug } = router.query;
+
   //
 
   //states
@@ -121,65 +129,67 @@ const StandaloneSideDrawer = () => {
       )}
       <AnimatePresence>
         {openSideDrawer && (
-          <>
-            <StyledSideDrawer
-              transition={{ duration: 0.5 }}
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: '40vw' }}
-              exit={{ opacity: 0, width: 0 }}
-              theme={theme}
-            >
-              <Link style={{ textDecoration: 'none' }} href={'/'}>
-                <StyledSideDrawerTab
-                  theme={theme}
-                  active={router.pathname === '/'}
-                >
-                  <Typography variant='button'>HOME</Typography>
-                </StyledSideDrawerTab>
-              </Link>
+          <StyledSideDrawer
+            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: '40vw' }}
+            exit={{ opacity: 0, width: 0 }}
+            theme={theme}
+            key='sidedrawer'
+          >
+            <Link style={{ textDecoration: 'none' }} href={'/'}>
+              <StyledSideDrawerTab
+                theme={theme}
+                active={router.pathname === '/'}
+              >
+                <Typography variant='button'>HOME</Typography>
+              </StyledSideDrawerTab>
+            </Link>
 
-              {[
-                { name: 'banery', href: '/kategorie/banery' },
-                { name: 'before after', href: '/kategorie/before after' },
-                { name: 'miniaturki', href: '/kategorie/miniaturki' },
-                { name: 'photoshop', href: '/kategorie/photoshop' },
-                { name: 'tapety', href: '/kategorie/tapety' },
-              ].map(({ name, href }) => {
-                return (
-                  <Link
-                    style={{ textDecoration: 'none' }}
-                    href={'/kategorie/[slug]'}
-                    as={href}
+            {[
+              { name: 'banery', href: '/kategorie/banery' },
+              { name: 'before after', href: '/kategorie/before after' },
+              { name: 'miniaturki', href: '/kategorie/miniaturki' },
+              { name: 'photoshop', href: '/kategorie/photoshop' },
+              { name: 'tapety', href: '/kategorie/tapety' },
+            ].map(({ name, href }) => {
+              return (
+                <Link
+                  style={{ textDecoration: 'none' }}
+                  href={'/kategorie/[slug]'}
+                  as={href}
+                  key={name}
+                >
+                  <StyledSideDrawerTab
                     key={name}
+                    theme={theme}
+                    active={category === name}
                   >
-                    <StyledSideDrawerTab
-                      key={name}
-                      theme={theme}
-                      active={category === name}
-                    >
-                      <Typography variant='button'>
-                        {name.toUpperCase()}
-                      </Typography>
-                    </StyledSideDrawerTab>
-                  </Link>
-                );
-              })}
+                    <Typography variant='button'>
+                      {name.toUpperCase()}
+                    </Typography>
+                  </StyledSideDrawerTab>
+                </Link>
+              );
+            })}
 
-              <Link style={{ textDecoration: 'none' }} href={'/kontakt'}>
-                <StyledSideDrawerTab
-                  theme={theme}
-                  active={category === 'kontakt'}
-                >
-                  <Typography variant='button'>KONTAKT</Typography>
-                </StyledSideDrawerTab>
-              </Link>
-              <StyledArrowWrap theme={theme}>
-                <StyledArrowButton onClick={() => closeSideDrawerHandler()}>
-                  <ChevronLeftIcon />
-                </StyledArrowButton>
-              </StyledArrowWrap>
-            </StyledSideDrawer>
-          </>
+            <Link style={{ textDecoration: 'none' }} href={'/kontakt'}>
+              <StyledSideDrawerTab
+                theme={theme}
+                active={category === 'kontakt'}
+              >
+                <Typography variant='button'>KONTAKT</Typography>
+              </StyledSideDrawerTab>
+            </Link>
+            <StyledArrowWrap theme={theme}>
+              <StyledArrowButton
+                theme={theme}
+                onClick={() => closeSideDrawerHandler()}
+              >
+                <ChevronLeftIcon />
+              </StyledArrowButton>
+            </StyledArrowWrap>
+          </StyledSideDrawer>
         )}
       </AnimatePresence>
     </>
