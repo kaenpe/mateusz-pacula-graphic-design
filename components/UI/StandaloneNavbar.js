@@ -4,6 +4,8 @@ import EmailIcon from '@material-ui/icons/Email';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import styled from 'styled-components';
 import StandaloneDesktopTabs from './StandaloneDesktopTabs';
+import StandaloneSideDrawer from './StandaloneSideDrawer';
+//styled
 const Navigation = styled.nav`
   position: fixed;
   display: flex;
@@ -20,14 +22,14 @@ export const StyledFlexWrapper = styled.div`
     cursor: pointer;
   }
 `;
-const StyledMenuItem = styled(MenuItem)`
+export const StyledMenuItem = styled(MenuItem)`
   && {
     &:hover {
       background-color: transparent;
     }
   }
 `;
-const StyledIconButton = styled(IconButton)`
+export const StyledIconButton = styled(IconButton)`
   && {
     &:hover {
       background-color: ${({ theme }) =>
@@ -35,14 +37,26 @@ const StyledIconButton = styled(IconButton)`
     }
   }
 `;
-
+//
 const StandaloneNavbar = () => {
+  //variables
   const theme = useTheme();
   const matches = useMediaQuery('(min-width:600px)');
+  //
+  //states
+  //
+  //functions
+  //
+  //effects
+  //
 
   return (
     <Navigation theme={theme}>
-      {matches && <StandaloneDesktopTabs></StandaloneDesktopTabs>}
+      {matches ? (
+        <StandaloneDesktopTabs></StandaloneDesktopTabs>
+      ) : (
+        <StandaloneSideDrawer></StandaloneSideDrawer>
+      )}
 
       <StyledFlexWrapper>
         {[1, 2].map((iteration) => (

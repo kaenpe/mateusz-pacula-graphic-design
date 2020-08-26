@@ -1,27 +1,30 @@
 import { Typography } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { fade, useTheme } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { CategoryContext } from '../../contexts/CategoryContext';
 import { DrawerContext } from '../../contexts/DrawerContext';
 import Link from '../../src/Link';
 import { StyledFlexWrapper } from './StandaloneNavbar';
 
-const StyledTab = styled.div`
+//styled
+export const StyledTab = styled(motion.div)`
   width: 140px;
   height: 60px;
   color: ${({ theme, active }) =>
     active ? theme.palette.secondary.light : theme.palette.secondary.dark};
   background-color: ${({ theme, active }) =>
-    active ? theme.palette.primary.light : 'inherit '};
+    active ? fade(theme.palette.secondary.light, 0.1) : 'inherit '};
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   &::after {
     content: '';
-    background-color: white;
+    background-color: ${({ theme }) =>
+      fade(theme.palette.secondary.light, 0.2)};
     transition: transform 0.4s ease-out;
     width: 100%;
     height: 100%;
@@ -39,97 +42,105 @@ const StyledTab = styled.div`
     }
   }
 `;
-const StyledCategoryDrawer = styled(motion.div)`
+export const StyledCategoryDrawer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   width: 140px;
   overflow-y: hidden;
   background-color: ${({ theme }) => theme.palette.primary.main};
 `;
-
+//
 const StandaloneDesktopTabs = () => {
-  const { openCategoryDrawer, setOpenCategoryDrawer } = useContext(
-    DrawerContext
-  );
-
-  const [currentCategory, setCurrentCategory] = useState('KATEGORIE');
-
-  const toggleCategoryDrawerHandler = () => {
-    setOpenCategoryDrawer((prevState) => !prevState);
-  };
-
-  const closeCategoryDrawerHandler = () => {
-    setOpenCategoryDrawer(false);
-  };
+  //vars
   const router = useRouter();
   const variants = {
     shrinked: { height: '60px' },
     expanded: {
-      height: router.pathname === '/' ? '360px' : '300px',
+      height: router.pathname === ('/' || '/kontakt') ? '360px' : '300px',
     },
   };
-  useEffect(() => {
-    setCurrentCategory(
-      router.pathname === '/' ? 'KATEGORIE' : router.query.slug
-    );
-  }, [router.query.slug, router.pathname]);
   const theme = useTheme();
+  const { slug } = router.query;
+  //
 
+  //states
+  const { openCategoryDrawer, setOpenCategoryDrawer } = useContext(
+    DrawerContext
+  );
+  const { category } = useContext(CategoryContext);
+  //
+
+  //functions
+  const toggleCategoryDrawerHandler = () => {
+    setOpenCategoryDrawer((prevState) => !prevState);
+  };
+  //
+  const closeCategoryDrawerHandler = () => {
+    setOpenCategoryDrawer(false);
+  };
+  //effects
+
+  //
   return (
-    <>
-      <StyledFlexWrapper>
-        <Link style={{ textDecoration: 'none' }} href={'/'}>
-          <StyledTab
-            onClick={() => closeCategoryDrawerHandler()}
-            theme={theme}
-            active={router.pathname === '/'}
-          >
-            <Typography variant='button'>HOME</Typography>
-          </StyledTab>
-        </Link>
-
-        <StyledCategoryDrawer
+    <StyledFlexWrapper>
+      <Link style={{ textDecoration: 'none' }} href={'/'}>
+        <StyledTab
+          onClick={() => closeCategoryDrawerHandler()}
           theme={theme}
-          variants={variants}
-          animate={openCategoryDrawer ? 'expanded' : 'shrinked'}
-          transition={{ duration: 0.5 }}
+          active={router.pathname === '/'}
         >
-          <div>
-            <StyledTab
-              theme={theme}
-              active={router.pathname === '/kategorie/[slug]'}
-              onClick={() => toggleCategoryDrawerHandler()}
-            >
-              <Typography variant='button'>{currentCategory} </Typography>
-            </StyledTab>
-          </div>
+          <Typography variant='button'>HOME</Typography>
+        </StyledTab>
+      </Link>
 
-          {[
-            { name: 'miniaturki', href: '/kategorie/miniaturki' },
-            { name: 'banery', href: '/kategorie/banery' },
-            { name: 'tapety', href: '/kategorie/tapety' },
-            { name: 'before after', href: '/kategorie/before after' },
-            { name: 'photoshop', href: '/kategorie/photoshop' },
-          ]
-            .filter(({ name }) => name !== router.query.slug)
-            .map(({ name, href }) => {
-              return (
-                <Link href={'/kategorie/[slug]'} as={href} key={name}>
-                  <StyledTab
-                    key={name}
-                    theme={theme}
-                    onClick={() => closeCategoryDrawerHandler()}
-                  >
-                    <Typography variant='button'>
-                      {name.toUpperCase()}
-                    </Typography>
-                  </StyledTab>
-                </Link>
-              );
-            })}
-        </StyledCategoryDrawer>
-      </StyledFlexWrapper>
-    </>
+      <StyledCategoryDrawer
+        theme={theme}
+        variants={variants}
+        animate={openCategoryDrawer ? 'expanded' : 'shrinked'}
+        transition={{ duration: 0.5 }}
+      >
+        <div>
+          <StyledTab
+            theme={theme}
+            active={router.pathname === '/kategorie/[slug]'}
+            onClick={() => toggleCategoryDrawerHandler()}
+          >
+            <Typography variant='button'>{category} </Typography>
+          </StyledTab>
+        </div>
+
+        {[
+          { name: 'banery', href: '/kategorie/banery' },
+          { name: 'before after', href: '/kategorie/before after' },
+          { name: 'miniaturki', href: '/kategorie/miniaturki' },
+          { name: 'photoshop', href: '/kategorie/photoshop' },
+          { name: 'tapety', href: '/kategorie/tapety' },
+        ]
+          .filter(({ name }) => name !== slug)
+          .map(({ name, href }) => {
+            return (
+              <Link href={'/kategorie/[slug]'} as={href} key={name}>
+                <StyledTab
+                  key={name}
+                  theme={theme}
+                  onClick={() => closeCategoryDrawerHandler()}
+                >
+                  <Typography variant='button'>{name.toUpperCase()}</Typography>
+                </StyledTab>
+              </Link>
+            );
+          })}
+      </StyledCategoryDrawer>
+      <Link href={'/kontakt'}>
+        <StyledTab
+          active={router.pathname === '/kontakt'}
+          theme={theme}
+          onClick={() => closeCategoryDrawerHandler()}
+        >
+          <Typography variant='button'>KONTAKT</Typography>
+        </StyledTab>
+      </Link>
+    </StyledFlexWrapper>
   );
 };
 
