@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { projectAuth } from '../../firebase/config';
 import Welcome from './Welcome';
 
 const StyledHome = styled.main`
@@ -11,17 +10,6 @@ const StyledHome = styled.main`
 `;
 
 const Home = () => {
-  const logout = () => {
-    projectAuth
-      .signOut()
-      .then(function () {
-        // Sign-out successful.
-      })
-      .catch(function (error) {
-        // An error happened.
-      });
-  };
-
   return (
     <>
       <Welcome></Welcome>

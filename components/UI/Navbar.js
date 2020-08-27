@@ -1,10 +1,17 @@
-import { IconButton, MenuItem, useMediaQuery } from '@material-ui/core';
+import {
+  IconButton,
+  MenuItem,
+  Typography,
+  useMediaQuery,
+} from '@material-ui/core';
 import { fade, useTheme } from '@material-ui/core/styles';
 import EmailIcon from '@material-ui/icons/Email';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { AuthContext } from '../../contexts/AuthContext';
+import { projectAuth } from '../../firebase/config';
+import Link from '../../src/Link';
 import DesktopTabs, { StyledTab } from './DesktopTabs';
 import SideDrawer from './SideDrawer';
 //styled
@@ -53,6 +60,16 @@ const Navbar = () => {
   const { auth } = useContext(AuthContext);
   //
   //functions
+  const logout = () => {
+    projectAuth
+      .signOut()
+      .then(function () {
+        // Sign-out successful.
+      })
+      .catch(function (error) {
+        // An error happened.
+      });
+  };
   //
   //effects
   //
@@ -63,19 +80,19 @@ const Navbar = () => {
 
       <StyledFlexWrapper icons>
         {auth ? (
-          <StyledTab theme={theme}>
+          <StyledTab theme={theme} onClick={() => logout()}>
             <Typography variant='button'>Logout</Typography>
           </StyledTab>
         ) : (
           <>
-            <Link href='login'>
+            <Link href='/login'>
               <StyledTab theme={theme}>
                 <Typography variant='button'>Login</Typography>
               </StyledTab>
             </Link>
-            <Link href='signup'>
+            <Link href='/signup'>
               <StyledTab theme={theme}>
-                <Typography variant='button'>Logout</Typography>
+                <Typography variant='button'>Signup</Typography>
               </StyledTab>
             </Link>
           </>

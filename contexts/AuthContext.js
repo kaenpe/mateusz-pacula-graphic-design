@@ -2,13 +2,13 @@ import React, { createContext, useEffect, useState } from 'react';
 import { projectAuth } from '../firebase/config';
 export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(null);
   useEffect(() => {
     projectAuth.onAuthStateChanged((user) => {
       if (user) {
         setAuth(user.email);
       } else {
-        setAuth(false);
+        setAuth(null);
         // User is signed out.
         // ...
       }
