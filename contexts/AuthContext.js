@@ -6,8 +6,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     projectAuth.onAuthStateChanged((user) => {
       if (user) {
-        // User is signed in.
-        setAuth(user.displayName);
+        setAuth(user.email);
       } else {
         setAuth(false);
         // User is signed out.
@@ -15,6 +14,7 @@ export const AuthContextProvider = ({ children }) => {
       }
     });
   }, []);
+
   const value = { auth, setAuth };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

@@ -62,7 +62,24 @@ const Navbar = () => {
       {matches ? <DesktopTabs></DesktopTabs> : <SideDrawer></SideDrawer>}
 
       <StyledFlexWrapper icons>
-        <StyledTab theme={theme}>{auth}</StyledTab>
+        {auth ? (
+          <StyledTab theme={theme}>
+            <Typography variant='button'>Logout</Typography>
+          </StyledTab>
+        ) : (
+          <>
+            <Link href='login'>
+              <StyledTab theme={theme}>
+                <Typography variant='button'>Login</Typography>
+              </StyledTab>
+            </Link>
+            <Link href='signup'>
+              <StyledTab theme={theme}>
+                <Typography variant='button'>Logout</Typography>
+              </StyledTab>
+            </Link>
+          </>
+        )}
         {[1, 2].map((iteration) => (
           <StyledMenuItem disableRipple key={iteration}>
             <StyledIconButton color='secondary' theme={theme}>
