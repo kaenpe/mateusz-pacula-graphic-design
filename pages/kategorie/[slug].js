@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import uuid from 'react-uuid';
 import styled from 'styled-components';
 import { projectFirestore } from '../../firebase/config';
 const StyledCategoryWrapper = styled.div`
@@ -18,7 +19,7 @@ const Category = ({ filteredDocs }) => {
   return (
     <StyledCategoryWrapper>
       {filteredDocs.map((doc) => (
-        <StyledImg src={doc.url}></StyledImg>
+        <StyledImg key={uuid()} src={doc.url}></StyledImg>
       ))}
     </StyledCategoryWrapper>
   );
