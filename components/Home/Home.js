@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import AddFileForm from './AddFileForm';
 import Welcome from './Welcome';
 
 const StyledHome = styled.main`
@@ -14,7 +15,9 @@ const Home = () => {
     <>
       <Welcome></Welcome>
 
-      <StyledHome></StyledHome>
+      <StyledHome>
+        <AddFileForm></AddFileForm>
+      </StyledHome>
     </>
   );
 };

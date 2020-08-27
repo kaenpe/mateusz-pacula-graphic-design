@@ -1,10 +1,9 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { AuthContext } from '../../contexts/AuthContext';
 import { projectAuth } from '../../firebase/config';
 //styled
 export const StyledFormWrapper = styled.div`
@@ -18,7 +17,7 @@ export const StyledFormWrapper = styled.div`
 export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  &:nth-child(2) {
+  * {
     margin: 10px;
   }
 `;
@@ -28,7 +27,6 @@ const AuthForm = ({ isLogin }) => {
   const router = useRouter();
   //
   //states
-  const { setAuth } = useContext(AuthContext);
   //
   //functions
   const login = (email, password) => {
@@ -38,7 +36,7 @@ const AuthForm = ({ isLogin }) => {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log(errorMessage);
+        console.log(`${errorCode}: ${errorMessage}`);
         // ...
       });
   };
@@ -50,7 +48,7 @@ const AuthForm = ({ isLogin }) => {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log(errorMessage);
+        console.log(`${errorCode}: ${errorMessage}`);
         // ...
       });
   }; //
@@ -59,7 +57,7 @@ const AuthForm = ({ isLogin }) => {
   //
   return (
     <StyledFormWrapper>
-      <h1>{isLogin ? 'Login' : 'Signup'}!</h1>
+      <h1>{isLogin ? 'Login' : 'Rejestracja'}!</h1>
 
       <Formik
         initialValues={{ email: '', password: '' }}
@@ -78,14 +76,19 @@ const AuthForm = ({ isLogin }) => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           if (isLogin) {
-            login(values.email, values.password);
-            console.log(`Signed in. email: ${values.email}`);
-            setSubmitting(false);
+            setTimeout(() => {
+              login(values.email, values.password);
+              console.log(`Signed in. email: ${values.email}`);
+              setSubmitting(false);
+              router.replace('/');
+            }, 1000);
           } else {
-            createUser(values.email, values.password);
-            login(values.email, values.password);
-            console.log(`Signed up. email: ${values.email}`);
-            setSubmitting(false);
+            setTimeout(() => {
+              createUser(values.email, values.password);
+              login(values.email, values.password);
+              console.log(`Signed up. email: ${values.email}`);
+              setSubmitting(false);
+            }, 1000);
           }
         }}
       >
@@ -95,14 +98,14 @@ const AuthForm = ({ isLogin }) => {
               type='email'
               name='email'
               component={TextField}
-              variant='outlined'
+              variant='filled'
               color='primary'
             />
             <Field
               type='password'
               name='password'
               component={TextField}
-              variant='outlined'
+              variant='filled'
               color='primary'
             />
             <Button
@@ -110,9 +113,9 @@ const AuthForm = ({ isLogin }) => {
               variant='contained'
               type='submit'
               disabled={isSubmitting}
-              onClick={() => router.replace('/')}
+              // onClick={() => router.replace('/')}
             >
-              <Typography>{isLogin ? 'Login' : 'Signup'}</Typography>
+              {isLogin ? 'Login' : 'Signup'}
             </Button>
           </StyledForm>
         )}
