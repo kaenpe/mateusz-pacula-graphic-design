@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
 import { projectFirestore } from '../../firebase/config';
@@ -13,14 +13,15 @@ const StyledImg = styled.img`
   grid-column: 2;
 `;
 const Category = ({ filteredDocs }) => {
-  useEffect(() => {
-    console.log(filteredDocs);
-  }, []);
+  const router = useRouter();
+
   return (
     <StyledCategoryWrapper>
-      {filteredDocs.map((doc) => (
-        <StyledImg key={uuid()} src={doc.url}></StyledImg>
-      ))}
+      {router.isFallback
+        ? null
+        : filteredDocs.map((doc) => (
+            <StyledImg key={uuid()} src={doc.url}></StyledImg>
+          ))}
     </StyledCategoryWrapper>
   );
 };
@@ -33,7 +34,7 @@ export const getStaticPaths = async () => {
     { params: { slug: 'photoshop' } },
   ];
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 export const getStaticProps = async ({ params }) => {
   const docs = [];
