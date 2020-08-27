@@ -4,17 +4,17 @@ export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
   useEffect(() => {
-    projectAuth.onAuthStateChanged(function (user) {
+    projectAuth.onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
-        setAuth(user.email);
+        setAuth(user.displayName);
       } else {
         setAuth(false);
         // User is signed out.
         // ...
       }
     });
-  }, [auth]);
+  }, []);
   const value = { auth, setAuth };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

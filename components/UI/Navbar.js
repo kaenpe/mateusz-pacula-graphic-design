@@ -2,8 +2,10 @@ import { IconButton, MenuItem, useMediaQuery } from '@material-ui/core';
 import { fade, useTheme } from '@material-ui/core/styles';
 import EmailIcon from '@material-ui/icons/Email';
 import InstagramIcon from '@material-ui/icons/Instagram';
+import { useContext } from 'react';
 import styled from 'styled-components';
-import DesktopTabs from './DesktopTabs';
+import { AuthContext } from '../../contexts/AuthContext';
+import DesktopTabs, { StyledTab } from './DesktopTabs';
 import SideDrawer from './SideDrawer';
 //styled
 const Navigation = styled.nav`
@@ -48,6 +50,7 @@ const Navbar = () => {
   const matches = useMediaQuery('(min-width:730px)');
   //
   //states
+  const { auth } = useContext(AuthContext);
   //
   //functions
   //
@@ -59,6 +62,7 @@ const Navbar = () => {
       {matches ? <DesktopTabs></DesktopTabs> : <SideDrawer></SideDrawer>}
 
       <StyledFlexWrapper icons>
+        <StyledTab theme={theme}>{auth}</StyledTab>
         {[1, 2].map((iteration) => (
           <StyledMenuItem disableRipple key={iteration}>
             <StyledIconButton color='secondary' theme={theme}>
@@ -70,7 +74,6 @@ const Navbar = () => {
             </StyledIconButton>
           </StyledMenuItem>
         ))}
-        <div></div>
       </StyledFlexWrapper>
     </Navigation>
   );

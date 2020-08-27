@@ -10,9 +10,9 @@ const Signup = () => {
   //states
   //
   //functions
-  const createUser = (email, password) => {
+  const createUser = (email, password, displayName) => {
     projectAuth
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password, displayName)
       .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -29,7 +29,7 @@ const Signup = () => {
       <h1>Signup!</h1>
 
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: '', password: '', name: '' }}
         validate={(values) => {
           const errors = {};
 
@@ -54,6 +54,7 @@ const Signup = () => {
         {({ isSubmitting }) => (
           <Form>
             <Field type='email' name='email' />
+            <Field type='name' name='name' />
             <ErrorMessage name='email' component='div' />
             <Field type='password' name='password' />
             <ErrorMessage name='password' component='div' />

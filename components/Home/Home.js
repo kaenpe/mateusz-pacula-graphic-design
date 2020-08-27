@@ -1,7 +1,8 @@
 import { Button, Typography } from '@material-ui/core';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { AuthContext } from '../../contexts/AuthContext';
+import { projectAuth } from '../../firebase/config';
 import Login from '../Auth/Login';
 import Signup from '../Auth/Signup';
 import Welcome from './Welcome';
@@ -15,9 +16,16 @@ const StyledHome = styled.main`
 
 const Home = () => {
   const { auth } = useContext(AuthContext);
-  useEffect(() => {
-    console.log(auth);
-  }, []);
+  const logout = () => {
+    projectAuth
+      .signOut()
+      .then(function () {
+        // Sign-out successful.
+      })
+      .catch(function (error) {
+        // An error happened.
+      });
+  };
   return (
     <>
       <Welcome></Welcome>
@@ -25,7 +33,7 @@ const Home = () => {
       <StyledHome>
         <Signup></Signup>
         <Login></Login>
-        <Button></Button>
+        <Button onClick={() => logout()}>Logout</Button>
         <Typography variant='h1' color='secondary'></Typography>
       </StyledHome>
     </>
