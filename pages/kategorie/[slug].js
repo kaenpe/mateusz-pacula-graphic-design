@@ -1,17 +1,19 @@
 import { useRouter } from 'next/router';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
+import ImageItem from '../../components/Kategorie/ImageItem';
 import { projectFirestore } from '../../firebase/config';
 const StyledCategoryWrapper = styled.div`
   grid-row: 2;
   width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+  justify-items: center;
+  align-items: center;
+  margin: 20px auto;
 `;
-const StyledImg = styled.img`
-  width: 200px;
-  height: 200px;
-  grid-row: 2;
-  grid-column: 2;
-`;
+
 const Category = ({ filteredDocs }) => {
   const router = useRouter();
 
@@ -20,7 +22,7 @@ const Category = ({ filteredDocs }) => {
       {router.isFallback
         ? null
         : filteredDocs.map((doc) => (
-            <StyledImg key={uuid()} src={doc.url}></StyledImg>
+            <ImageItem key={uuid()} doc={doc}></ImageItem>
           ))}
     </StyledCategoryWrapper>
   );
