@@ -1,42 +1,10 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
-import { projectAuth } from '../../firebase/config';
-//styled
-//
 
-const Signup = () => {
-  //variables
-  //
-  //states
-  //
-  //functions
-  const createUser = (email, password) => {
-    projectAuth
-      .createUserWithEmailAndPassword(email, password)
-      .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
-  };
-
-  const login = (email, password) => {
-    projectAuth
-      .signInWithEmailAndPassword(email, password)
-      .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
-  };
-  //
-  //effects
-  //
+const Login = () => {
   return (
     <div>
-      <h1>Signup!</h1>
+      <h1>Login!</h1>
 
       <Formik
         initialValues={{ email: '', password: '' }}
@@ -55,7 +23,7 @@ const Signup = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            createUser(values.email, values.password);
+            login(values.email, values.password);
             console.log(`Signed up. email: ${values.email}`);
             setSubmitting(false);
           }, 400);
@@ -77,4 +45,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
