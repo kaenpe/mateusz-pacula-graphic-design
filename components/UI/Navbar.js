@@ -21,6 +21,7 @@ const Navigation = styled.nav`
   justify-content: space-between;
   height: 60px;
   width: 100vw;
+  z-index: 3;
   background-color: ${({ theme }) => theme.palette.primary.main};
 `;
 export const StyledFlexWrapper = styled.div`

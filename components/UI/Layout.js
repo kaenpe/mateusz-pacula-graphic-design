@@ -11,13 +11,20 @@ const StyledLayout = styled.div`
 
 const Layout = ({ children }) => {
   //states
-  const { openCategoryDrawer, setOpenCategoryDrawer } = useContext(
-    DrawerContext
-  );
+  const {
+    openCategoryDrawer,
+    setOpenCategoryDrawer,
+    openSideDrawer,
+    setOpenSideDrawer,
+  } = useContext(DrawerContext);
   //
   //functions
   const closeCategoryHandler = () => {
-    return openCategoryDrawer ? setOpenCategoryDrawer(false) : null;
+    return openCategoryDrawer
+      ? setOpenCategoryDrawer(false)
+      : openSideDrawer
+      ? setOpenSideDrawer(false)
+      : null;
   };
   //
   //effects
