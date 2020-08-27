@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
+import Signup from '../Auth/Signup';
 import Welcome from './Welcome';
 
 const StyledHome = styled.main`
@@ -15,6 +16,7 @@ const Home = () => {
       <Welcome></Welcome>
 
       <StyledHome>
+        <Signup></Signup>
         <Typography variant='h1' color='secondary'></Typography>
       </StyledHome>
     </>
