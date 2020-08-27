@@ -33,7 +33,7 @@ export const getStaticPaths = async () => {
     { params: { slug: 'photoshop' } },
   ];
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 export const getStaticProps = async ({ params }) => {
   const docs = [];
