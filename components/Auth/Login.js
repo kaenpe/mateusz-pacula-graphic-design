@@ -1,7 +1,26 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+import { projectAuth } from '../../firebase/config';
 
 const Login = () => {
+  //states
+  const { setAuth } = useContext(AuthContext);
+  //
+  //functions
+  const login = (email, password) => {
+    projectAuth
+      .signInWithEmailAndPassword(email, password)
+      .catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
+  }; //
+  //effects
+
+  //
   return (
     <div>
       <h1>Login!</h1>
@@ -24,6 +43,7 @@ const Login = () => {
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             login(values.email, values.password);
+            setAuth(true);
             console.log(`Signed up. email: ${values.email}`);
             setSubmitting(false);
           }, 400);

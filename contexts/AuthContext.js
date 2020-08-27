@@ -1,9 +1,10 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { projectAuth } from '../firebase/config';
 export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(function (user) {
+    projectAuth.onAuthStateChanged(function (user) {
       if (user) {
         // User is signed in.
         setAuth(user.email);
@@ -13,7 +14,6 @@ export const AuthContextProvider = ({ children }) => {
         // ...
       }
     });
-    return () => {};
   }, [auth]);
   const value = { auth, setAuth };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

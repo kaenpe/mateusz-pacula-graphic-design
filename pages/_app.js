@@ -5,6 +5,7 @@ import Head from 'next/head';
 import React from 'react';
 import Layout from '../components/UI/Layout';
 import Navbar from '../components/UI/Navbar';
+import AuthContextProvider from '../contexts/AuthContext';
 import CategoryContextProvider from '../contexts/CategoryContext';
 import DrawerContextProvider from '../contexts/DrawerContext';
 import WelcomeContextProvider from '../contexts/WelcomeContext';
@@ -34,16 +35,18 @@ class MyApp extends App {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <CategoryContextProvider>
-            <DrawerContextProvider>
-              <WelcomeContextProvider>
-                <Layout>
-                  <Navbar></Navbar>
-                  <Component {...pageProps} />
-                </Layout>
-              </WelcomeContextProvider>
-            </DrawerContextProvider>
-          </CategoryContextProvider>
+          <AuthContextProvider>
+            <CategoryContextProvider>
+              <DrawerContextProvider>
+                <WelcomeContextProvider>
+                  <Layout>
+                    <Navbar></Navbar>
+                    <Component {...pageProps} />
+                  </Layout>
+                </WelcomeContextProvider>
+              </DrawerContextProvider>
+            </CategoryContextProvider>
+          </AuthContextProvider>
         </ThemeProvider>
       </>
     );
