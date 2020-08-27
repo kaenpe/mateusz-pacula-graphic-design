@@ -49,6 +49,7 @@ export const getStaticProps = async ({ params }) => {
     return { ...doc, createdAt: JSON.stringify(doc.createdAt) };
   });
   return {
+    revalidate: 1,
     props: {
       filteredDocs,
     },
