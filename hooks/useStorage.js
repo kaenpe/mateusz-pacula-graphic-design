@@ -4,14 +4,14 @@ import {
   projectStorage,
   timestamp,
 } from '../firebase/config';
-const useStorage = (file, collection, title) => {
+const useStorage = (file, title, category) => {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
   const [url, setUrl] = useState(null);
 
   useEffect(() => {
     const storageRef = projectStorage.ref(file.name);
-    const collectionRef = projectFirestore.collection(`${collection}`);
+    const collectionRef = projectFirestore.collection(`photoshop`);
     storageRef.put(file).on(
       'state_changed',
       (snap) => {
@@ -21,7 +21,12 @@ const useStorage = (file, collection, title) => {
       (err) => setError(err),
       async () => {
         const url = await storageRef.getDownloadURL();
-        collectionRef.add({ url, title: title, createdAt: timestamp() });
+        collectionRef.add({
+          url,
+          title: title,
+          category: category,
+          createdAt: timestamp(),
+        });
         setUrl(url);
       }
     );

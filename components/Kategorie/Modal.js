@@ -24,7 +24,7 @@ const ModalBackdrop = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
   background-color: black;
   opacity: 0.2;
 `;

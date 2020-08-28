@@ -18,12 +18,13 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const docs = [];
   await projectFirestore
-    .collection(params.slug)
+    .collection('photoshop')
     .orderBy('createdAt', 'desc')
     .get()
     .then((snapshot) => {
       snapshot.forEach((doc) => {
-        docs.push({ ...doc.data() });
+        (params.slug === doc.data().category || params.slug === 'photoshop') &&
+          docs.push({ ...doc.data() });
       });
     });
   const filteredDocs = docs.map((doc) => {

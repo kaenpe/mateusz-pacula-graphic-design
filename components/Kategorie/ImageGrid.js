@@ -19,7 +19,7 @@ const StyledCategoryWrapper = styled(motion.div)`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-gap: 20px;
-  padding: 40px 100px;
+  padding: 5% 8%;
   @media (max-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
   }

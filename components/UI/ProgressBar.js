@@ -9,11 +9,11 @@ const StyledProgressBar = styled(motion.div)`
 `;
 const ProgressBar = ({ file, setFile, title, category }) => {
   const theme = useTheme();
-  const { progress } = useStorage(file, category, title);
+  const { progress } = useStorage(file, title, category);
 
   return (
     <StyledProgressBar
-      transition={{ duration: 1 }}
+      transition={{ duration: 2 }}
       animate={{ width: `${progress}%` }}
       theme={theme}
     ></StyledProgressBar>
