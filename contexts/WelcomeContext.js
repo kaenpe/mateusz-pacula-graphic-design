@@ -8,3 +8,8 @@ export const WelcomeContextProvider = ({ children }) => {
   );
 };
 export default WelcomeContextProvider;
+//styled//
+//vars//
+//states//
+//functions//
+//effects//

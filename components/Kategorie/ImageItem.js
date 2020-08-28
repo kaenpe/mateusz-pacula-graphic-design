@@ -18,8 +18,6 @@ const StyledImageItemWrapper = styled(motion.div)`
   position: relative;
   overflow: hidden;
   padding: 40%;
-  max-height: 430px;
-  max-width: 430px;
   opacity: 0.8;
   border-radius: 40px;
   border: ${({ theme }) => `2px solid ${theme.palette.primary.dark}`};
@@ -43,7 +41,11 @@ const StyledImageItemWrapper = styled(motion.div)`
     }
   }
 `; //
-
+//styled//
+//vars//
+//states//
+//functions//
+//effects//
 const ImageItem = ({ doc }) => {
   const theme = useTheme();
   return (

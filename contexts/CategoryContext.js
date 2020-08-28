@@ -18,3 +18,8 @@ export const CategoryProvider = ({ children }) => {
   );
 };
 export default CategoryProvider;
+//styled//
+//vars//
+//states//
+//functions//
+//effects//

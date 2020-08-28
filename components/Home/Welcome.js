@@ -3,6 +3,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { WelcomeContext } from '../../contexts/WelcomeContext';
+//styled//
+//vars//
+//states//
+//functions//
+//effects//
 const StyledVoxelLogo = styled(motion.div)`
   display: flex;
   justify-content: center;

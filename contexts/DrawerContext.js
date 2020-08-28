@@ -14,3 +14,8 @@ export const DrawerContextProvider = ({ children }) => {
   );
 };
 export default DrawerContextProvider;
+//styled//
+//vars//
+//states//
+//functions//
+//effects//

@@ -6,3 +6,8 @@ const ProgressBar = ({ file, setFile, title, category }) => {
 };
 
 export default ProgressBar;
+//styled//
+//vars//
+//states//
+//functions//
+//effects//

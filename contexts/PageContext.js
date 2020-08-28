@@ -6,3 +6,8 @@ export const PageContextProvider = ({ children }) => {
   return <PageContext.Provider value={value}>{children}</PageContext.Provider>;
 };
 export default PageContextProvider;
+//styled//
+//vars//
+//states//
+//functions//
+//effects//

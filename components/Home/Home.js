@@ -9,7 +9,11 @@ const StyledHome = styled.main`
   padding: 0 3% 0 3%;
   grid-row: 2;
 `;
-
+//styled//
+//vars//
+//states//
+//functions//
+//effects//
 const Home = () => {
   return (
     <>
