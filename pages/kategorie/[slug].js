@@ -1,12 +1,17 @@
 import { fade, useTheme } from '@material-ui/core/styles';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
+import { useContext, useState } from 'react';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
 import ImageItem from '../../components/Kategorie/ImageItem';
+import { PageContext } from '../../contexts/PageContext';
 import { projectFirestore } from '../../firebase/config';
-const StyledCategoryWrapper = styled.div`
+import Link from '../../src/Link';
+var _ = require('lodash');
+const StyledCategoryWrapper = styled(motion.div)`
   grid-row: 2;
   width: 100vw;
   display: grid;
@@ -55,22 +60,53 @@ const StyledIconButton = styled.div`
 const Category = ({ filteredDocs }) => {
   const router = useRouter();
   const theme = useTheme();
+  const { currentPage, setCurrentPage } = useContext(PageContext);
+  const [direction, setDirection] = useState('left');
   return (
     <StyledCategoryWrapper>
       {router.isFallback
         ? null
-        : filteredDocs.map((doc) => (
-            <ImageItem key={uuid()} doc={doc}></ImageItem>
-          ))}
-      <StyledIconButton theme={theme} left>
-        <NavigateBeforeIcon
-          style={{ position: 'absolute' }}
-        ></NavigateBeforeIcon>
-      </StyledIconButton>
-      <StyledIconButton theme={theme} right>
+        : filteredDocs
+            .filter(
+              (doc, index) =>
+                _.range(currentPage * 9 - 9, currentPage * 9).includes(index) &&
+                true
+            )
+            .map((doc) => <ImageItem key={uuid()} doc={doc}></ImageItem>)}
+      <Link
+        href='/kategorie/[slug]/[id]'
+        as={`/kategorie/${router.query.slug}/${currentPage - 1}`}
+      >
+        <StyledIconButton
+          theme={theme}
+          left
+          onClick={() => {
+            currentPage > 1 && setCurrentPage((prevState) => (prevState -= 1));
+            setDirection('left');
+          }}
+        >
+          <NavigateBeforeIcon
+            style={{ position: 'absolute' }}
+          ></NavigateBeforeIcon>
+        </StyledIconButton>
+      </Link>{' '}
+      <Link
+        href='/kategorie/[slug]/[id]'
+        as={`/kategorie/${router.query.slug}/${currentPage + 1}`}
+      >
         {' '}
-        <NavigateNextIcon style={{ position: 'absolute' }}></NavigateNextIcon>
-      </StyledIconButton>
+        <StyledIconButton
+          theme={theme}
+          right
+          onClick={() => {
+            setCurrentPage((prevState) => (prevState += 1));
+            setDirection('right');
+          }}
+        >
+          {' '}
+          <NavigateNextIcon style={{ position: 'absolute' }}></NavigateNextIcon>
+        </StyledIconButton>
+      </Link>
     </StyledCategoryWrapper>
   );
 };

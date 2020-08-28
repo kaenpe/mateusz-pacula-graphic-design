@@ -9,6 +9,7 @@
     "formik": "^2.1.5",
     "formik-material-ui": "^3.0.0-alpha.0",
     "framer-motion": "^2.4.3-beta.2",
+    "lodash": "^4.17.20",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",

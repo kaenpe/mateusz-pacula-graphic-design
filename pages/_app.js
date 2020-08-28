@@ -8,6 +8,7 @@ import Navbar from '../components/UI/Navbar';
 import AuthContextProvider from '../contexts/AuthContext';
 import CategoryContextProvider from '../contexts/CategoryContext';
 import DrawerContextProvider from '../contexts/DrawerContext';
+import PageContextProvider from '../contexts/PageContext';
 import WelcomeContextProvider from '../contexts/WelcomeContext';
 import theme from '../src/theme';
 import '../styles/globals.css';
@@ -40,10 +41,12 @@ class MyApp extends App {
             <CategoryContextProvider>
               <DrawerContextProvider>
                 <WelcomeContextProvider>
-                  <Layout>
-                    <Navbar></Navbar>
-                    <Component {...pageProps} />
-                  </Layout>
+                  <PageContextProvider>
+                    <Layout>
+                      <Navbar></Navbar>
+                      <Component {...pageProps} />
+                    </Layout>
+                  </PageContextProvider>
                 </WelcomeContextProvider>
               </DrawerContextProvider>
             </CategoryContextProvider>

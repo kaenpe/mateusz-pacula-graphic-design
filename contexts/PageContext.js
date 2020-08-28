@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react';
-export const Page = createContext();
-export const PageProvider = ({ children }) => {
+export const PageContext = createContext();
+export const PageContextProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const value = { currentPage, setCurrentPage };
-  return <Page.Provider value={value}>{children}</Page.Provider>;
+  return <PageContext.Provider value={value}>{children}</PageContext.Provider>;
 };
-export default PageProvider;
+export default PageContextProvider;
