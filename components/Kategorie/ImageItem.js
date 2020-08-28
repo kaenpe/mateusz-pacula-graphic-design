@@ -1,4 +1,5 @@
-import { fade, Typography, useTheme } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { fade, useTheme } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
