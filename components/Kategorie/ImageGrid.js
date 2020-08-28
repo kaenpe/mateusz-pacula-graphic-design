@@ -1,12 +1,13 @@
 import { fade, useTheme } from '@material-ui/core/styles';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
 import { PageContext } from '../../contexts/PageContext';
+import { StyledBackdrop } from '../UI/SideDrawer';
 import ImageItem from './ImageItem';
 import Modal from './Modal';
 var _ = require('lodash');
@@ -59,7 +60,22 @@ const StyledIconButton = styled.div`
     }
   }
 `;
-
+const StyledModalWrapper = styled(motion.div)`
+  height: max-content;
+  width: max-content;
+  border: 2px solid ${({ theme }) => theme.palette.primary.main};
+  position: fixed;
+  z-index: 3;
+  top: -10px;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  display: block;
+  max-width: 90vw;
+  max-height: 80vh;
+  margin: 100px auto;
+  box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
+`;
 const ImageGrid = ({ docs }) => {
   //vars
   const router = useRouter();
@@ -67,7 +83,7 @@ const ImageGrid = ({ docs }) => {
   //
   //states
   const { currentPage, setCurrentPage } = useContext(PageContext);
-  const [showModal, setShowModal] = useState(false);
+  const [modal, setModal] = useState({ show: false, image: null });
   //
   //functions//
   const nextPageHandler = () => {
@@ -77,15 +93,35 @@ const ImageGrid = ({ docs }) => {
     currentPage > 1 && setCurrentPage((prevState) => prevState - 1);
   };
 
-  const showModalHandler = () => {
-    setShowModal((prevState) => !prevState);
+  const openModalHandler = (image) => {
+    setModal({ show: true, image: image });
+  };
+  const closeModalHandler = () => {
+    setModal({ show: false, image: null });
   };
   //effects//
 
   return (
     <>
-      {showModal && <Modal></Modal>}
-      <StyledCategoryWrapper onClick={() => showModalHandler()}>
+      <StyledCategoryWrapper>
+        {modal.show && (
+          <StyledBackdrop onClick={() => closeModalHandler()}></StyledBackdrop>
+        )}
+        <AnimatePresence>
+          {modal.show && (
+            <>
+              <StyledModalWrapper
+                theme={theme}
+                initial={{ y: '-110vh', opacity: 0 }}
+                animate={{ y: '0', opacity: 1 }}
+                exit={{ y: '-110vh', opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Modal image={modal.image}></Modal>
+              </StyledModalWrapper>
+            </>
+          )}
+        </AnimatePresence>
         {router.isFallback
           ? null
           : docs
@@ -95,7 +131,13 @@ const ImageGrid = ({ docs }) => {
                     index
                   ) && true
               )
-              .map((doc) => <ImageItem key={uuid()} doc={doc}></ImageItem>)}
+              .map((doc) => (
+                <ImageItem
+                  handleModal={openModalHandler}
+                  key={uuid()}
+                  doc={doc}
+                ></ImageItem>
+              ))}
         <StyledIconButton
           theme={theme}
           left

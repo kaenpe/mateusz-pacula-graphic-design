@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import { fade, useTheme } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
 import React from 'react';
@@ -12,7 +11,6 @@ const StyledImg = styled.img`
   left: 0;
   position: absolute;
 `;
-const StyledTitle = styled(Typography)``;
 const StyledImageItemWrapper = styled(motion.div)`
   transition: opacity 1s ease-out;
   position: relative;
@@ -46,10 +44,11 @@ const StyledImageItemWrapper = styled(motion.div)`
 //states//
 //functions//
 //effects//
-const ImageItem = ({ doc }) => {
+const ImageItem = ({ doc, handleModal }) => {
   const theme = useTheme();
   return (
     <StyledImageItemWrapper
+      onClick={() => handleModal(doc.url)}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       theme={theme}

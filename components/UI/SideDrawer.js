@@ -32,7 +32,7 @@ const StyledSideDrawer = styled(motion.div)`
   overflow-x: hidden;
   white-space: nowrap;
 `;
-const StyledBackdrop = styled.div`
+export const StyledBackdrop = styled.div`
   width: 100vw;
   height: 100vh;
   position: fixed;
