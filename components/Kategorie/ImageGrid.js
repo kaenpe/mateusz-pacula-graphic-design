@@ -8,6 +8,7 @@ import uuid from 'react-uuid';
 import styled from 'styled-components';
 import { PageContext } from '../../contexts/PageContext';
 import ImageItem from './ImageItem';
+import Modal from './Modal';
 var _ = require('lodash');
 
 //styled//
@@ -66,15 +67,25 @@ const ImageGrid = ({ docs }) => {
   //
   //states
   const { currentPage, setCurrentPage } = useContext(PageContext);
-  const { showModal, setShowModal } = useState(false);
+  const [showModal, setShowModal] = useState(false);
   //
   //functions//
+  const nextPageHandler = () => {
+    setCurrentPage((prevState) => prevState + 1);
+  };
+  const previousPageHandler = () => {
+    currentPage > 1 && setCurrentPage((prevState) => prevState - 1);
+  };
+
+  const showModalHandler = () => {
+    setShowModal((prevState) => !prevState);
+  };
   //effects//
 
   return (
     <>
       {showModal && <Modal></Modal>}
-      <StyledCategoryWrapper>
+      <StyledCategoryWrapper onClick={() => showModalHandler()}>
         {router.isFallback
           ? null
           : docs
@@ -88,22 +99,13 @@ const ImageGrid = ({ docs }) => {
         <StyledIconButton
           theme={theme}
           left
-          onClick={() => {
-            currentPage > 1 && setCurrentPage((prevState) => (prevState -= 1));
-          }}
+          onClick={() => previousPageHandler()}
         >
           <NavigateBeforeIcon
             style={{ position: 'absolute' }}
           ></NavigateBeforeIcon>
         </StyledIconButton>{' '}
-        <StyledIconButton
-          theme={theme}
-          right
-          onClick={() => {
-            setCurrentPage((prevState) => (prevState += 1));
-          }}
-        >
-          {' '}
+        <StyledIconButton theme={theme} right onClick={() => nextPageHandler()}>
           <NavigateNextIcon style={{ position: 'absolute' }}></NavigateNextIcon>
         </StyledIconButton>
       </StyledCategoryWrapper>

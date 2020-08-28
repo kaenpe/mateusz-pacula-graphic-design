@@ -19,6 +19,7 @@ export const getStaticProps = async ({ params }) => {
   const docs = [];
   await projectFirestore
     .collection(params.slug)
+    .orderBy('createdAt', 'desc')
     .get()
     .then((snapshot) => {
       snapshot.forEach((doc) => {

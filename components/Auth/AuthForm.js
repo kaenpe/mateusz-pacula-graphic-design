@@ -88,6 +88,7 @@ const AuthForm = ({ isLogin }) => {
               login(values.email, values.password);
               console.log(`Signed up. email: ${values.email}`);
               setSubmitting(false);
+              router.replace('/');
             }, 1000);
           }
         }}

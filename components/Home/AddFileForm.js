@@ -1,6 +1,6 @@
-import { Button, InputLabel, MenuItem } from '@material-ui/core';
+import { Button, InputLabel, MenuItem, Typography } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
-import { useTheme } from '@material-ui/core/styles';
+import { fade, useTheme } from '@material-ui/core/styles';
 import { Field, Formik } from 'formik';
 import { Select, TextField } from 'formik-material-ui';
 import React, { useState } from 'react';
@@ -24,20 +24,50 @@ const StyledButton = styled(Button)`
   justify-self: center;
   height: 30px;
 `;
+const StyledFileName = styled(Typography)`
+  text-align: center;
+`;
+const StyledImageUpload = styled.label`
+  border: 1px solid ${({ theme }) => theme.palette.primary.main};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  height: 40;
+  width: 40px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-weight: bold;
+  margin: 5px;
+  input {
+    display: none;
+  }
+  &:hover {
+    background-color: ${({ theme }) => fade(theme.palette.primary.main, 0.15)};
+  }
+`;
 //
 const AddFileForm = () => {
   //consts
   const theme = useTheme();
-
+  const types = ['image/png', 'image/jpeg', 'image/svg'];
   //
   //states//
   const [file, setFile] = useState(null);
+  const [error, setError] = useState(null);
   //functions//
 
   const fileChangeHandler = (e) => {
     let selected = e.target.files[0];
-    setFile(selected);
-    return console.log(file);
+    if (selected && types.includes(selected.type)) {
+      {
+        error && setError(null);
+      }
+      setFile(selected);
+    } else {
+      setFile(null);
+      setError('Please select an image file');
+    }
   };
   //effects//
   return (
@@ -49,6 +79,7 @@ const AddFileForm = () => {
         onSubmit={(values, { setSubmitting, resetForm }) => {
           setTimeout(() => {
             setSubmitting(false);
+            setFile(null);
             resetForm();
           }, 1000);
         }}
@@ -67,6 +98,7 @@ const AddFileForm = () => {
               <Field
                 type='Tytuł'
                 name='title'
+                placeholder='tytuł'
                 component={TextField}
                 variant='outlined'
                 color='primary'
@@ -81,19 +113,23 @@ const AddFileForm = () => {
                   <MenuItem value={'photoshop'}>photoshop</MenuItem>
                 </Field>
               </StyledFormControl>
-              <input
-                id='file-upload'
-                type='file'
-                onChange={fileChangeHandler}
-              />
-              ;
+              <StyledFileName>{file && file.name}</StyledFileName>
+              <StyledImageUpload htmlFor='file-upload' theme={theme}>
+                <input
+                  id='file-upload'
+                  type='file'
+                  onChange={fileChangeHandler}
+                />
+                <span>+</span>
+              </StyledImageUpload>
+              {error && <div>{error}</div>};
               <StyledButton
                 color='primary'
                 variant='contained'
                 type='submit'
                 disabled={isSubmitting}
               >
-                DODAJ
+                UPLOAD
               </StyledButton>
             </StyledForm>
           </>
