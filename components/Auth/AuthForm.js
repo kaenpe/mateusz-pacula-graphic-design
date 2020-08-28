@@ -40,17 +40,6 @@ const AuthForm = ({ isLogin }) => {
       });
   };
 
-  const createUser = (email, password) => {
-    projectAuth
-      .createUserWithEmailAndPassword(email, password)
-      .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(`${errorCode}: ${errorMessage}`);
-        // ...
-      });
-  }; //
   //effects
 
   //
@@ -74,22 +63,12 @@ const AuthForm = ({ isLogin }) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          if (isLogin) {
-            setTimeout(() => {
-              login(values.email, values.password);
-              console.log(`Signed in. email: ${values.email}`);
-              setSubmitting(false);
-              router.replace('/');
-            }, 1000);
-          } else {
-            setTimeout(() => {
-              createUser(values.email, values.password);
-              login(values.email, values.password);
-              console.log(`Signed up. email: ${values.email}`);
-              setSubmitting(false);
-              router.replace('/');
-            }, 1000);
-          }
+          setTimeout(() => {
+            login(values.email, values.password);
+            console.log(`Signed in. email: ${values.email}`);
+            setSubmitting(false);
+            router.replace('/');
+          }, 1000);
         }}
       >
         {({ isSubmitting }) => (
@@ -117,7 +96,7 @@ const AuthForm = ({ isLogin }) => {
               disabled={isSubmitting}
               // onClick={() => router.replace('/')}
             >
-              {isLogin ? 'Login' : 'Signup'}
+              Login
             </Button>
           </StyledForm>
         )}
