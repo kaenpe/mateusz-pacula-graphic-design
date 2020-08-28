@@ -1,28 +1,56 @@
-import { Typography } from '@material-ui/core';
+import { fade, Typography, useTheme } from '@material-ui/core';
+import { motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
+
+//styled
 const StyledImg = styled.img`
   min-width: 100%;
   min-height: 100%;
-  position: absolute;
   top: 0;
   left: 0;
+  position: absolute;
 `;
-
 const StyledTitle = styled(Typography)``;
-
-const StyledImageItemWrapper = styled.div`
+const StyledImageItemWrapper = styled(motion.div)`
   transition: opacity 1s ease-out;
   position: relative;
   overflow: hidden;
-  height: 80%;
-  width: 80%;
+  padding: 40%;
+  max-height: 430px;
+  max-width: 430px;
   opacity: 0.8;
-  border-radius: 20px;
-`;
+  border-radius: 40px;
+  border: ${({ theme }) => `2px solid ${theme.palette.primary.dark}`};
+  cursor: pointer;
+  &::after {
+    background-color: ${({ theme }) => fade(theme.palette.secondary.dark, 0.2)};
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 40px;
+    position: absolute;
+    transition: transform 0.3s ease-out;
+    transform: scale(0.001, 0.001);
+  }
+  &:hover {
+    &::after {
+      transform: scale(1, 1);
+      cursor: pointer;
+    }
+  }
+`; //
+
 const ImageItem = ({ doc }) => {
+  const theme = useTheme();
   return (
-    <StyledImageItemWrapper>
+    <StyledImageItemWrapper
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      theme={theme}
+    >
       <StyledImg src={doc.url}></StyledImg>
     </StyledImageItemWrapper>
   );

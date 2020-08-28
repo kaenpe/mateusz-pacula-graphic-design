@@ -3,27 +3,29 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
 import ImageItem from '../../components/Kategorie/ImageItem';
 import { PageContext } from '../../contexts/PageContext';
 import { projectFirestore } from '../../firebase/config';
-import Link from '../../src/Link';
 var _ = require('lodash');
 const StyledCategoryWrapper = styled(motion.div)`
   grid-row: 2;
   width: 100vw;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-auto-rows: auto;
-  grid-gap: 1em;
-  justify-items: center;
-  align-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 20px;
   padding: 40px;
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  @media (min-width: 2400px) {
+    grid-template-columns: repeat(10, 1fr);
   }
 `;
 
@@ -61,7 +63,6 @@ const Category = ({ filteredDocs }) => {
   const router = useRouter();
   const theme = useTheme();
   const { currentPage, setCurrentPage } = useContext(PageContext);
-  const [direction, setDirection] = useState('left');
   return (
     <StyledCategoryWrapper>
       {router.isFallback
@@ -69,44 +70,32 @@ const Category = ({ filteredDocs }) => {
         : filteredDocs
             .filter(
               (doc, index) =>
-                _.range(currentPage * 9 - 9, currentPage * 9).includes(index) &&
-                true
+                _.range(currentPage * 10 - 10, currentPage * 10).includes(
+                  index
+                ) && true
             )
             .map((doc) => <ImageItem key={uuid()} doc={doc}></ImageItem>)}
-      <Link
-        href='/kategorie/[slug]/[id]'
-        as={`/kategorie/${router.query.slug}/${currentPage - 1}`}
+      <StyledIconButton
+        theme={theme}
+        left
+        onClick={() => {
+          currentPage > 1 && setCurrentPage((prevState) => (prevState -= 1));
+        }}
       >
-        <StyledIconButton
-          theme={theme}
-          left
-          onClick={() => {
-            currentPage > 1 && setCurrentPage((prevState) => (prevState -= 1));
-            setDirection('left');
-          }}
-        >
-          <NavigateBeforeIcon
-            style={{ position: 'absolute' }}
-          ></NavigateBeforeIcon>
-        </StyledIconButton>
-      </Link>{' '}
-      <Link
-        href='/kategorie/[slug]/[id]'
-        as={`/kategorie/${router.query.slug}/${currentPage + 1}`}
+        <NavigateBeforeIcon
+          style={{ position: 'absolute' }}
+        ></NavigateBeforeIcon>
+      </StyledIconButton>{' '}
+      <StyledIconButton
+        theme={theme}
+        right
+        onClick={() => {
+          setCurrentPage((prevState) => (prevState += 1));
+        }}
       >
         {' '}
-        <StyledIconButton
-          theme={theme}
-          right
-          onClick={() => {
-            setCurrentPage((prevState) => (prevState += 1));
-            setDirection('right');
-          }}
-        >
-          {' '}
-          <NavigateNextIcon style={{ position: 'absolute' }}></NavigateNextIcon>
-        </StyledIconButton>
-      </Link>
+        <NavigateNextIcon style={{ position: 'absolute' }}></NavigateNextIcon>
+      </StyledIconButton>
     </StyledCategoryWrapper>
   );
 };
