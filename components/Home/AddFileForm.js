@@ -81,7 +81,7 @@ const AddFileForm = () => {
             setSubmitting(false);
             setFile(null);
             resetForm();
-          }, 1000);
+          }, 2000);
         }}
       >
         {({ isSubmitting, values: { title, category } }) => (
@@ -127,7 +127,7 @@ const AddFileForm = () => {
                 color='primary'
                 variant='contained'
                 type='submit'
-                disabled={isSubmitting}
+                disabled={isSubmitting || !file}
               >
                 UPLOAD
               </StyledButton>
