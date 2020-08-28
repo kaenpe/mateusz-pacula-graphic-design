@@ -3,7 +3,7 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
 import { PageContext } from '../../contexts/PageContext';
@@ -66,43 +66,48 @@ const ImageGrid = ({ docs }) => {
   //
   //states
   const { currentPage, setCurrentPage } = useContext(PageContext);
+  const { showModal, setShowModal } = useState(false);
   //
   //functions//
   //effects//
 
   return (
-    <StyledCategoryWrapper>
-      {router.isFallback
-        ? null
-        : docs
-            .filter(
-              (doc, index) =>
-                _.range(currentPage * 8 - 8, currentPage * 8).includes(index) &&
-                true
-            )
-            .map((doc) => <ImageItem key={uuid()} doc={doc}></ImageItem>)}
-      <StyledIconButton
-        theme={theme}
-        left
-        onClick={() => {
-          currentPage > 1 && setCurrentPage((prevState) => (prevState -= 1));
-        }}
-      >
-        <NavigateBeforeIcon
-          style={{ position: 'absolute' }}
-        ></NavigateBeforeIcon>
-      </StyledIconButton>{' '}
-      <StyledIconButton
-        theme={theme}
-        right
-        onClick={() => {
-          setCurrentPage((prevState) => (prevState += 1));
-        }}
-      >
-        {' '}
-        <NavigateNextIcon style={{ position: 'absolute' }}></NavigateNextIcon>
-      </StyledIconButton>
-    </StyledCategoryWrapper>
+    <>
+      {showModal && <Modal></Modal>}
+      <StyledCategoryWrapper>
+        {router.isFallback
+          ? null
+          : docs
+              .filter(
+                (doc, index) =>
+                  _.range(currentPage * 8 - 8, currentPage * 8).includes(
+                    index
+                  ) && true
+              )
+              .map((doc) => <ImageItem key={uuid()} doc={doc}></ImageItem>)}
+        <StyledIconButton
+          theme={theme}
+          left
+          onClick={() => {
+            currentPage > 1 && setCurrentPage((prevState) => (prevState -= 1));
+          }}
+        >
+          <NavigateBeforeIcon
+            style={{ position: 'absolute' }}
+          ></NavigateBeforeIcon>
+        </StyledIconButton>{' '}
+        <StyledIconButton
+          theme={theme}
+          right
+          onClick={() => {
+            setCurrentPage((prevState) => (prevState += 1));
+          }}
+        >
+          {' '}
+          <NavigateNextIcon style={{ position: 'absolute' }}></NavigateNextIcon>
+        </StyledIconButton>
+      </StyledCategoryWrapper>
+    </>
   );
 };
 
