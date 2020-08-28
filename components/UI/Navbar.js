@@ -91,11 +91,11 @@ const Navbar = () => {
                 <Typography variant='button'>Login</Typography>
               </StyledTab>
             </Link>
-            <Link href='/signup'>
+            {/* <Link href='/signup'>
               <StyledTab theme={theme}>
                 <Typography variant='button'>Signup</Typography>
               </StyledTab>
-            </Link>
+            </Link> */}
           </>
         )}
         <StyledMenuItem>
@@ -104,7 +104,7 @@ const Navbar = () => {
           </StyledIconButton>
         </StyledMenuItem>
         <StyledMenuItem>
-          <Link href='/messages'>
+          <Link href='/kontakt'>
             <StyledIconButton color='secondary' theme={theme}>
               <EmailIcon></EmailIcon>
             </StyledIconButton>

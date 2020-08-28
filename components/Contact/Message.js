@@ -1,23 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Typography } from '@material-ui/core';
+import { Typography, useTheme } from '@material-ui/core';
+import { motion } from 'framer-motion';
 
 //styled
-const StyledMessage = styled.div`
-  width: 100vw;
-  border-bottom: 1px solid #00000050;
+const StyledMessage = styled(motion.div)`
+  border: 1px solid #00000050;
   padding: 20px;
+  background-color: ${({ theme }) => theme.palette.primary.main};
+  color: ${({ theme }) => theme.palette.secondary.dark};
+  word-wrap: anywhere;
+  padding-bottom: 40px;
+  &:hover {
+    background-color: ${({ theme }) => theme.palette.primary.light};
+    cursor: pointer;
+  }
+`;
+const StyledMessageWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 //
-const Message = ({ message }) => {
+const Message = ({ message, deleteMessage }) => {
   //consts
+  const theme = useTheme();
+  //
+  //states
+  //
+  //functions
 
   //
   return (
-    <StyledMessage>
-      <Typography variant='h3'>{message.name} </Typography>
+    <StyledMessage
+      key={message.id}
+      theme={theme}
+      onClick={() => deleteMessage(message.id)}
+      initial={{ x: 0, height: 0 }}
+      animate={{ x: 0, height: 'auto' }}
+      exit={{ x: '-110vw', height: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Typography variant='h3'>{message.name}</Typography>
+
       <Typography variant='h5'>{message.text} </Typography>
-      <Typography variant='p'>{message.createdAt} </Typography>
+      <Typography style={{ marginTop: '20px' }}>
+        {message.createdAt}{' '}
+      </Typography>
     </StyledMessage>
   );
 };

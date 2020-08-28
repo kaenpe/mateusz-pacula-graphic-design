@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { Button, useTheme, Typography } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles';
 import styled from 'styled-components';
@@ -22,7 +22,7 @@ const StyledForm = styled(Form)`
   align-items: center;
   overflow: hidden;
   * {
-    margin: 20px;
+    margin: 10px;
   }
 `;
 
@@ -81,7 +81,7 @@ const ContactForm = () => {
   return (
     <>
       <Formik
-        initialValues={{ name: '', text: '' }}
+        initialValues={{ name: '', text: '', email: '' }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           setTimeout(() => {
             sendMessage(values.name, values.text), setSubmitting(false);
@@ -89,7 +89,7 @@ const ContactForm = () => {
           }, 500);
         }}
       >
-        {({ isSubmitting }) => (
+        {({ values, isSubmitting }) => (
           <StyledForm theme={theme}>
             <header>
               <Typography variant='h3' alignCenter>
@@ -102,6 +102,14 @@ const ContactForm = () => {
               name='name'
               label='Imię'
               placeholder='Imię'
+              variant='outlined'
+            />
+            <StyledNameField
+              theme={theme}
+              type='Email'
+              name='email'
+              label='Email'
+              placeholder='Email'
               variant='outlined'
             />
             <StyledBodyField
@@ -119,7 +127,7 @@ const ContactForm = () => {
               color='primary'
               theme={theme}
               type='submit'
-              disabled={isSubmitting}
+              disabled={isSubmitting || !values.name || !values.text}
             >
               Wyślij
             </StyledButton>

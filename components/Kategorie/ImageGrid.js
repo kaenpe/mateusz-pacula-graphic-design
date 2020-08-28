@@ -96,7 +96,8 @@ const ImageGrid = ({ docs }) => {
         </AnimatePresence>
         {router.isFallback
           ? null
-          : docs
+          : docs &&
+            docs
               .filter(
                 (doc, index) =>
                   range(currentPage * 8 - 8, currentPage * 8).includes(index) &&

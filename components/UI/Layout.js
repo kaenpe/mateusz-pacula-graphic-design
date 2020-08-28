@@ -5,7 +5,7 @@ const StyledLayout = styled.div`
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-rows: 60px auto 30px;
+  grid-template-rows: 60px auto;
   grid-template-columns: 1;
 `;
 

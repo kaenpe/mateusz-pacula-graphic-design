@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Messages from '../components/Contact/Messages';
 import { projectFirestore } from '../firebase/config';
+import { AuthContext } from '../contexts/AuthContext';
 //styled//
 const messages = ({ messages }) => {
-  return <Messages messages={messages}></Messages>;
+  const { auth } = useContext(AuthContext);
+  return <>{auth && <Messages messages={messages}></Messages>}</>;
 };
 
 export const getStaticProps = async () => {

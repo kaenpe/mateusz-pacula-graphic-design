@@ -8,6 +8,7 @@ import { CategoryContext } from '../../contexts/CategoryContext';
 import { DrawerContext } from '../../contexts/DrawerContext';
 import Link from '../../src/Link';
 import { StyledFlexWrapper } from './Navbar';
+import { AuthContext } from '../../contexts/AuthContext';
 
 //styled
 export const StyledTab = styled(motion.div)`
@@ -79,6 +80,7 @@ const DesktopTabs = () => {
     DrawerContext
   );
   const { category } = useContext(CategoryContext);
+  const { auth } = useContext(AuthContext);
   //
 
   //functions
@@ -133,11 +135,13 @@ const DesktopTabs = () => {
               );
             })}
         </StyledCategoryDrawer>
-        <Link href={'/kontakt'}>
-          <StyledTab active={router.pathname === '/kontakt'} theme={theme}>
-            <Typography variant='button'>KONTAKT</Typography>
-          </StyledTab>
-        </Link>
+        {auth && (
+          <Link href={'/messages'}>
+            <StyledTab active={router.pathname === '/messages'} theme={theme}>
+              <Typography variant='button'>WIADOMOŚCI</Typography>
+            </StyledTab>
+          </Link>
+        )}
       </StyledFlexWrapper>
       <StyledFlexWrapper logo>
         <StyledImgTab theme={theme}>

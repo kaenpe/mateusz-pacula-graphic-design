@@ -6,8 +6,7 @@ const StyledFooter = styled.div`
   height: 60px;
   position: fixed;
   bottom: 0;
-  left: 5vw;
-  width: 90vw;
+  left: 2vw;
   background-color: transparent;
   opacity: 0.7;
   display: flex;
@@ -25,7 +24,7 @@ const Footer = () => {
     <>
       {matches && (
         <StyledFooter theme={theme}>
-          <Typography gutterBottom={false} color='primary' variant='paragraph'>
+          <Typography gutterBottom={false} color='primary'>
             Copyright© 2020 Kamil Knap.
           </Typography>
         </StyledFooter>
