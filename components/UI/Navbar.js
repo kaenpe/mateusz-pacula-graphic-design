@@ -98,17 +98,18 @@ const Navbar = () => {
             </Link>
           </>
         )}
-        {[1, 2].map((iteration) => (
-          <StyledMenuItem disableRipple key={iteration}>
+        <StyledMenuItem>
+          <StyledIconButton color='secondary' theme={theme}>
+            <InstagramIcon></InstagramIcon>
+          </StyledIconButton>
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <Link href='/messages'>
             <StyledIconButton color='secondary' theme={theme}>
-              {iteration === 1 ? (
-                <InstagramIcon></InstagramIcon>
-              ) : (
-                <EmailIcon></EmailIcon>
-              )}
+              <EmailIcon></EmailIcon>
             </StyledIconButton>
-          </StyledMenuItem>
-        ))}
+          </Link>
+        </StyledMenuItem>
       </StyledFlexWrapper>
     </Navigation>
   );

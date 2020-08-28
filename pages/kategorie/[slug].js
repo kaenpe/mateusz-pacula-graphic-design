@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useContext } from 'react';
 import ImageGrid from '../../components/Kategorie/ImageGrid';
 import { projectFirestore } from '../../firebase/config';
+import { PageContext } from '../../contexts/PageContext';
 const Kategoria = ({ filteredDocs }) => {
   const router = useRouter();
+  const { currentPage } = useContext(PageContext);
   return (
     <>
       <Head>

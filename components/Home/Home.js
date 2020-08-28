@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import AddFileForm from './AddFileForm';
 import Welcome from './Welcome';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const StyledHome = styled.main`
   height: 100vh;
@@ -10,18 +11,18 @@ const StyledHome = styled.main`
   grid-row: 2;
 `;
 //styled//
-//vars//
-//states//
-//functions//
-//effects//
+
 const Home = () => {
+  //vars//
+  //states//
+  const { auth } = useContext(AuthContext);
+  //functions//
+  //effects//
   return (
     <>
       <Welcome></Welcome>
 
-      <StyledHome>
-        <AddFileForm></AddFileForm>
-      </StyledHome>
+      <StyledHome>{auth && <AddFileForm></AddFileForm>}</StyledHome>
     </>
   );
 };

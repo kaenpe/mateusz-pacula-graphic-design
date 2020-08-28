@@ -12,6 +12,7 @@ import PageContextProvider from '../contexts/PageContext';
 import WelcomeContextProvider from '../contexts/WelcomeContext';
 import theme from '../src/theme';
 import '../styles/globals.css';
+import Footer from '../components/UI/Footer';
 class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.
@@ -44,6 +45,7 @@ class MyApp extends App {
                   <PageContextProvider>
                     <Layout>
                       <Navbar></Navbar>
+                      <Footer></Footer>
                       <Component {...pageProps} />
                     </Layout>
                   </PageContextProvider>

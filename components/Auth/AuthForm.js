@@ -11,7 +11,6 @@ export const StyledFormWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   grid-row: 2;
-  grid-column: 2;
 `;
 
 export const StyledForm = styled(Form)`
@@ -98,6 +97,7 @@ const AuthForm = ({ isLogin }) => {
             <Field
               type='email'
               name='email'
+              placeholder='email'
               component={TextField}
               variant='filled'
               color='primary'
@@ -105,6 +105,7 @@ const AuthForm = ({ isLogin }) => {
             <Field
               type='password'
               name='password'
+              placeholder='password'
               component={TextField}
               variant='filled'
               color='primary'

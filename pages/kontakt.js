@@ -1,11 +1,12 @@
 import Head from 'next/head';
+import ContactForm from '../components/Contact/ContactForm';
 const kontakt = () => {
   return (
     <>
       <Head>
         <title>Kontakt</title>
       </Head>
-      <div></div>
+      <ContactForm></ContactForm>
     </>
   );
 };

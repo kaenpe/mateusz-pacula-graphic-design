@@ -77,7 +77,7 @@ const AddFileForm = () => {
       <Formik
         initialValues={{ title: '', category: '' }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          return auth
+          auth
             ? setTimeout(() => {
                 setSubmitting(false);
                 setFile(null);

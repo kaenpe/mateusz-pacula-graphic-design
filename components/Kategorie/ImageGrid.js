@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { PageContext } from '../../contexts/PageContext';
 import ImageItem from './ImageItem';
 import Modal from './Modal';
-var _ = require('lodash');
+import range from 'lodash/range';
 
 //styled//
 const StyledImageGrid = styled(motion.main)`
@@ -64,6 +64,7 @@ const ImageGrid = ({ docs }) => {
   //vars
   const router = useRouter();
   const theme = useTheme();
+
   //
   //states
   const { currentPage, setCurrentPage } = useContext(PageContext);
@@ -98,9 +99,8 @@ const ImageGrid = ({ docs }) => {
           : docs
               .filter(
                 (doc, index) =>
-                  _.range(currentPage * 8 - 8, currentPage * 8).includes(
-                    index
-                  ) && true
+                  range(currentPage * 8 - 8, currentPage * 8).includes(index) &&
+                  true
               )
               .map((doc) => (
                 <ImageItem
