@@ -53,7 +53,7 @@ const ImageItem = ({ doc, handleModal }) => {
       whileTap={{ scale: 0.95 }}
       theme={theme}
     >
-      <StyledImg src={doc.url}></StyledImg>
+      <StyledImg src={doc.url} alt={doc.title}></StyledImg>
     </StyledImageItemWrapper>
   );
 };

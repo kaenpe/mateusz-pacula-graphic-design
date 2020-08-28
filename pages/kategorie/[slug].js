@@ -1,8 +1,18 @@
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React from 'react';
 import ImageGrid from '../../components/Kategorie/ImageGrid';
 import { projectFirestore } from '../../firebase/config';
 const Kategoria = ({ filteredDocs }) => {
-  return <ImageGrid docs={filteredDocs}></ImageGrid>;
+  const router = useRouter();
+  return (
+    <>
+      <Head>
+        <title>{router.query.slug}</title>
+      </Head>
+      <ImageGrid docs={filteredDocs}></ImageGrid>
+    </>
+  );
 };
 export const getStaticPaths = async () => {
   const paths = [

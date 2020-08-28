@@ -3,8 +3,9 @@ import FormControl from '@material-ui/core/FormControl';
 import { fade, useTheme } from '@material-ui/core/styles';
 import { Field, Formik } from 'formik';
 import { Select, TextField } from 'formik-material-ui';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { AuthContext } from '../../contexts/AuthContext';
 import { StyledForm, StyledFormWrapper } from '../Auth/AuthForm';
 import ProgressBar from '../UI/ProgressBar';
 
@@ -55,14 +56,13 @@ const AddFileForm = () => {
   //states//
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
+  const { auth } = useContext(AuthContext);
   //functions//
 
   const fileChangeHandler = (e) => {
     let selected = e.target.files[0];
     if (selected && types.includes(selected.type)) {
-      {
-        error && setError(null);
-      }
+      error && setError(null);
       setFile(selected);
     } else {
       setFile(null);
@@ -77,11 +77,18 @@ const AddFileForm = () => {
       <Formik
         initialValues={{ title: '', category: '' }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          setTimeout(() => {
-            setSubmitting(false);
-            setFile(null);
-            resetForm();
-          }, 2000);
+          return auth
+            ? setTimeout(() => {
+                setSubmitting(false);
+                setFile(null);
+                resetForm();
+              }, 2000)
+            : setTimeout(() => {
+                setSubmitting(false);
+                setFile(null);
+                setError('Zaloguj się');
+                resetForm();
+              }, 500);
         }}
       >
         {({ isSubmitting, values: { title, category } }) => (
@@ -122,7 +129,7 @@ const AddFileForm = () => {
                 />
                 <span>+</span>
               </StyledImageUpload>
-              {error && <div>{error}</div>};
+              {error && <Typography alignCenter>{error}</Typography>}
               <StyledButton
                 color='primary'
                 variant='contained'

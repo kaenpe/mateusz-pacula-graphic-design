@@ -12,7 +12,7 @@ import Modal from './Modal';
 var _ = require('lodash');
 
 //styled//
-const StyledCategoryWrapper = styled(motion.div)`
+const StyledImageGrid = styled(motion.main)`
   grid-row: 2;
   width: 100vw;
   display: grid;
@@ -87,7 +87,7 @@ const ImageGrid = ({ docs }) => {
 
   return (
     <>
-      <StyledCategoryWrapper>
+      <StyledImageGrid>
         <AnimatePresence>
           {modal.show && (
             <Modal closeModal={closeModalHandler} image={modal.image}></Modal>
@@ -121,7 +121,7 @@ const ImageGrid = ({ docs }) => {
         <StyledIconButton theme={theme} right onClick={() => nextPageHandler()}>
           <NavigateNextIcon style={{ position: 'absolute' }}></NavigateNextIcon>
         </StyledIconButton>
-      </StyledCategoryWrapper>
+      </StyledImageGrid>
     </>
   );
 };
