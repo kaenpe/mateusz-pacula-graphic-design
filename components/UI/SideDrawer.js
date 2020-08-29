@@ -56,10 +56,11 @@ const StyledSideDrawerTab = styled(StyledTab)`
 const StyledLogoWrapper = styled.div`
   width: 100%;
   height: 100%;
+  border-top: 1px solid #eeeeee10;
   color: ${({ theme }) => theme.palette.secondary.light};
   background-color: ${({ theme }) => theme.palette.primary.main};
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 `;
 
@@ -179,7 +180,7 @@ const SideDrawer = () => {
               </Link>
             )}
             <StyledLogoWrapper theme={theme}>
-              <StyledLogo src='/bialelogo.png' alt='navlogo'></StyledLogo>
+              <StyledLogo src='/bialelogo 2.svg' alt='navlogo'></StyledLogo>
             </StyledLogoWrapper>
           </StyledSideDrawer>
         )}
