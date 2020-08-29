@@ -3,13 +3,14 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
 import { PageContext } from '../../contexts/PageContext';
 import ImageItem from './ImageItem';
 import Modal from './Modal';
 import range from 'lodash/range';
+import { projectFirestore } from '../../firebase/config';
 
 //styled//
 const StyledImageGrid = styled(motion.main)`
@@ -68,8 +69,20 @@ const ImageGrid = ({ docs }) => {
   //states
   const { currentPage, setCurrentPage } = useContext(PageContext);
   const [modal, setModal] = useState({ show: false, image: null });
+  const [images, setImages] = useState(docs);
+  //effects
+  useEffect(() => {
+    setImages(docs);
+  }, [router.query.slug, router.pathname, images]);
   //
   //functions//
+  const deleteImageFromDom = (imageId) => {
+    setImages(
+      setImages((prevState) =>
+        prevState.filter((image) => image.id !== imageId)
+      )
+    );
+  };
   const nextPageHandler = () => {
     setCurrentPage((prevState) => prevState + 1);
   };
@@ -83,6 +96,20 @@ const ImageGrid = ({ docs }) => {
   const closeModalHandler = () => {
     setModal({ show: false, image: null });
   };
+
+  const deleteImage = (imageId) => {
+    projectFirestore
+      .collection('photoshop')
+      .doc(imageId)
+      .delete()
+      .then(function () {
+        console.log('Document successfully deleted!');
+      })
+      .catch(function (error) {
+        console.error('Error removing document: ', error);
+      });
+    setImages((prevState) => prevState.filter((image) => image.id !== imageId));
+  };
   //effects//
 
   return (
@@ -95,18 +122,21 @@ const ImageGrid = ({ docs }) => {
         </AnimatePresence>
         {router.isFallback
           ? null
-          : docs &&
-            docs
+          : images &&
+            images
               .filter(
-                (doc, index) =>
+                (image, index) =>
                   range(currentPage * 8 - 8, currentPage * 8).includes(index) &&
                   true
               )
-              .map((doc) => (
+              .map((image) => (
                 <ImageItem
+                  deleteImage={deleteImage}
                   handleModal={openModalHandler}
                   key={uuid()}
-                  doc={doc}
+                  image={image}
+                  closeModal={closeModalHandler}
+                  updateImage={deleteImageFromDom}
                 ></ImageItem>
               ))}
         <StyledIconButton

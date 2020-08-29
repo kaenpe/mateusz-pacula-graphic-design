@@ -18,7 +18,7 @@ const StyledModal = styled(motion.img)`
   box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
 `;
 
-const ModalBackdrop = styled(motion.div)`
+export const ModalBackdrop = styled(motion.div)`
   width: 100vw;
   height: 100vh;
   position: fixed;

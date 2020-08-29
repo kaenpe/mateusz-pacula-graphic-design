@@ -56,7 +56,6 @@ const AddFileForm = () => {
   //states//
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
-  const { auth } = useContext(AuthContext);
   //functions//
 
   const fileChangeHandler = (e) => {
@@ -77,18 +76,11 @@ const AddFileForm = () => {
       <Formik
         initialValues={{ title: '', category: '' }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          auth
-            ? setTimeout(() => {
-                setSubmitting(false);
-                setFile(null);
-                resetForm();
-              }, 2000)
-            : setTimeout(() => {
-                setSubmitting(false);
-                setFile(null);
-                setError('Zaloguj się');
-                resetForm();
-              }, 500);
+          setTimeout(() => {
+            setSubmitting(false);
+            setFile(null);
+            resetForm();
+          }, 2000);
         }}
       >
         {({ isSubmitting, values: { title, category } }) => (
