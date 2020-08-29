@@ -29,7 +29,7 @@ export const StyledFlexWrapper = styled.div`
   justify-content: ${({ tabs, logo, hamburger, icons }) =>
     tabs || hamburger ? 'flex-start' : logo ? 'center' : icons && 'flex-end'};
   width: 420px;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
 
   &:hover {
