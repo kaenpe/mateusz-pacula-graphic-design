@@ -157,15 +157,26 @@ const SideDrawer = () => {
                 );
               }
             )}
+            {auth ? (
+              <Link href={'/messages'}>
+                <StyledSideDrawerTab
+                  theme={theme}
+                  active={router.pathname === '/messages'}
+                >
+                  <Typography variant='button'>WIADOMOŚCI</Typography>
+                </StyledSideDrawerTab>
+              </Link>
+            ) : (
+              <Link href={'/kontakt'}>
+                <StyledSideDrawerTab
+                  theme={theme}
+                  active={router.pathname === '/kontakt'}
+                >
+                  <Typography variant='button'>KONTAKT</Typography>
+                </StyledSideDrawerTab>
+              </Link>
+            )}
 
-            <Link href={'/messages'}>
-              <StyledSideDrawerTab
-                theme={theme}
-                active={router.pathname === '/messages'}
-              >
-                <Typography variant='button'>WIADOMOŚCI</Typography>
-              </StyledSideDrawerTab>
-            </Link>
             {/* {auth ? (
               <StyledSideDrawerTab theme={theme} onClick={() => logout()}>
                 <Typography variant='button'>Logout</Typography>
