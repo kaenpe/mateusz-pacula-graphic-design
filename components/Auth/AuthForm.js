@@ -45,8 +45,6 @@ const AuthForm = ({ isLogin }) => {
   //
   return (
     <StyledFormWrapper>
-      <h1>{isLogin ? 'Login' : 'Rejestracja'}!</h1>
-
       <Formik
         initialValues={{ email: '', password: '' }}
         validate={(values) => {
@@ -78,7 +76,7 @@ const AuthForm = ({ isLogin }) => {
               name='email'
               placeholder='email'
               component={TextField}
-              variant='filled'
+              variant='outlined'
               color='primary'
             />
             <Field
@@ -86,7 +84,7 @@ const AuthForm = ({ isLogin }) => {
               name='password'
               placeholder='password'
               component={TextField}
-              variant='filled'
+              variant='outlined'
               color='primary'
             />
             <Button
@@ -94,6 +92,7 @@ const AuthForm = ({ isLogin }) => {
               variant='contained'
               type='submit'
               disabled={isSubmitting}
+              style={{ width: '100px', margin: '0 auto', height: '35px' }}
               // onClick={() => router.replace('/')}
             >
               Login

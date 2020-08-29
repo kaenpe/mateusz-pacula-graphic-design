@@ -10,8 +10,8 @@ const useStorage = (file, title, category) => {
   const [url, setUrl] = useState(null);
 
   useEffect(() => {
-    const storageRef = projectStorage.ref(file.name);
-    const collectionRef = projectFirestore.collection(`photoshop`);
+    const storage = projectStorage.ref(file.name);
+    const collection = projectFirestore.collection(`photoshop`);
     storageRef.put(file).on(
       'state_changed',
       (snap) => {
@@ -20,8 +20,8 @@ const useStorage = (file, title, category) => {
       },
       (err) => setError(err),
       async () => {
-        const url = await storageRef.getDownloadURL();
-        collectionRef.add({
+        const url = await storage.getDownloadURL();
+        collection.add({
           url,
           title: title,
           category: category,

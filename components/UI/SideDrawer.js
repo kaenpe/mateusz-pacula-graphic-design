@@ -14,7 +14,6 @@ import { StyledFlexWrapper, StyledMenuItem } from './Navbar';
 const StyledHamburger = styled(IconButton)`
   && {
     margin-left: ${({ theme }) => theme.spacing(2)};
-    display: ${({ open }) => open && 'none'};
     color: ${({ theme }) => theme.palette.secondary.main};
     &:hover {
       background-color: ${({ theme }) =>
@@ -119,7 +118,7 @@ const SideDrawer = () => {
           <StyledSideDrawer
             transition={{ duration: 0.5 }}
             initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: '50vw' }}
+            animate={{ opacity: 1, width: '60vw' }}
             exit={{ opacity: 0, width: 0 }}
             theme={theme}
             key='sidedrawer'

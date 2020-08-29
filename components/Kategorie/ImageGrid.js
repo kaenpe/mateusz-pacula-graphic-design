@@ -22,10 +22,9 @@ const StyledImageGrid = styled(motion.main)`
   padding: 5% 8%;
   @media (max-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
   }
-  @media (max-width: 600px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
+
   @media (min-width: 3000px) {
     grid-template-columns: repeat(10, 1fr);
   }
