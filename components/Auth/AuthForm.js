@@ -93,7 +93,6 @@ const AuthForm = ({ isLogin }) => {
               type='submit'
               disabled={isSubmitting}
               style={{ width: '100px', margin: '0 auto', height: '35px' }}
-              // onClick={() => router.replace('/')}
             >
               Login
             </Button>

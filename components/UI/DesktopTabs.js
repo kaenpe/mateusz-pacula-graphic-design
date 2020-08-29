@@ -49,6 +49,9 @@ export const StyledCategoryDrawer = styled(motion.div)`
   width: 140px;
   overflow-y: hidden;
   background-color: ${({ theme }) => theme.palette.primary.main};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const StyledImgTab = styled.div`
   width: 140px;

@@ -29,7 +29,7 @@ const StyledSideDrawer = styled(motion.div)`
   height: 100vh;
   z-index: 3;
   display: grid;
-  grid-template-rows: repeat(9, 1fr);
+  grid-template-rows: repeat(7, 1fr), 2fr;
   overflow-x: hidden;
   white-space: nowrap;
 `;
@@ -66,7 +66,7 @@ const StyledLogoWrapper = styled.div`
 `;
 
 const StyledLogo = styled.img`
-  width: 50vw;
+  align-self: center;
 `;
 
 //
@@ -166,7 +166,7 @@ const SideDrawer = () => {
                 <Typography variant='button'>WIADOMOŚCI</Typography>
               </StyledSideDrawerTab>
             </Link>
-            {auth ? (
+            {/* {auth ? (
               <StyledSideDrawerTab theme={theme} onClick={() => logout()}>
                 <Typography variant='button'>Logout</Typography>
               </StyledSideDrawerTab>
@@ -179,7 +179,7 @@ const SideDrawer = () => {
                   <Typography variant='button'>Login</Typography>
                 </StyledSideDrawerTab>
               </Link>
-            )}
+            )} */}
             <StyledLogoWrapper theme={theme}>
               <StyledLogo src='/bialelogo 2.svg' alt='navlogo'></StyledLogo>
             </StyledLogoWrapper>

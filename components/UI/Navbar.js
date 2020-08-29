@@ -7,12 +7,12 @@ import {
 import { fade, useTheme } from '@material-ui/core/styles';
 import EmailIcon from '@material-ui/icons/Email';
 import InstagramIcon from '@material-ui/icons/Instagram';
-import { useContext } from 'react';
+
 import styled from 'styled-components';
-import { AuthContext } from '../../contexts/AuthContext';
+
 import { projectAuth } from '../../firebase/config';
 import Link from '../../src/Link';
-import DesktopTabs, { StyledTab } from './DesktopTabs';
+import DesktopTabs from './DesktopTabs';
 import SideDrawer from './SideDrawer';
 //styled
 const Navigation = styled.nav`
@@ -33,7 +33,7 @@ export const StyledFlexWrapper = styled.div`
   position: relative;
 
   &:hover {
-    cursor: pointer;
+    cursor: default;
   }
 `;
 export const StyledMenuItem = styled(MenuItem)`
@@ -59,7 +59,7 @@ const Navbar = () => {
   const matches = useMediaQuery('(min-width:850px)');
   //
   //states
-  const { auth } = useContext(AuthContext);
+  // const { auth } = useContext(AuthContext);
   //
   //functions
   const logout = () => {
@@ -81,7 +81,7 @@ const Navbar = () => {
       {matches ? <DesktopTabs></DesktopTabs> : <SideDrawer></SideDrawer>}
 
       <StyledFlexWrapper icons style={{ alignItems: 'center' }}>
-        {matches &&
+        {/* {matches &&
           (auth ? (
             <StyledTab theme={theme} onClick={() => logout()}>
               <Typography variant='button'>Logout</Typography>
@@ -92,7 +92,7 @@ const Navbar = () => {
                 <Typography variant='button'>Login</Typography>
               </StyledTab>
             </Link>
-          ))}
+          ))} */}
         <StyledMenuItem>
           <StyledIconButton color='secondary' theme={theme}>
             <InstagramIcon></InstagramIcon>
