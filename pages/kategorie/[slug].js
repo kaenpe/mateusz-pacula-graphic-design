@@ -1,18 +1,17 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+
 import ImageGrid from '../../components/Kategorie/ImageGrid';
 import { projectFirestore } from '../../firebase/config';
-import { PageContext } from '../../contexts/PageContext';
-const Kategoria = ({ filteredDocs }) => {
+
+const Kategoria = ({ images }) => {
   const router = useRouter();
-  const { currentPage } = useContext(PageContext);
   return (
     <>
       <Head>
         <title>{router.query.slug}</title>
       </Head>
-      <ImageGrid docs={filteredDocs}></ImageGrid>
+      <ImageGrid docs={images}></ImageGrid>
     </>
   );
 };
@@ -28,24 +27,29 @@ export const getStaticPaths = async () => {
   return { paths, fallback: true };
 };
 export const getStaticProps = async ({ params }) => {
-  const docs = [];
+  const images = [];
   await projectFirestore
     .collection('photoshop')
     .orderBy('createdAt', 'desc')
     .get()
     .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        (params.slug === doc.data().category || params.slug === 'photoshop') &&
-          docs.push({ ...doc.data() });
+      snapshot.forEach((image) => {
+        (params.slug === image.data().category ||
+          params.slug === 'photoshop') &&
+          images.push({
+            ...image.data(),
+            id: image.id,
+            createdAt: new Date(
+              image.data().createdAt.seconds * 1000
+            ).toLocaleDateString('en-US'),
+          });
       });
     });
-  const filteredDocs = docs.map((doc) => {
-    return { ...doc, createdAt: JSON.stringify(doc.createdAt) };
-  });
+
   return {
     revalidate: 1,
     props: {
-      filteredDocs,
+      images,
     },
   };
 };
