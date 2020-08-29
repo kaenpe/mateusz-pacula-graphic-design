@@ -46,7 +46,7 @@ const StyledIconButton = styled.div`
     background-color: ${({ theme }) =>
       fade(theme.palette.secondary.dark, 0.25)};
     content: '';
-    width: 100%;
+    width: 50%;
     height: 100%;
     border-radius: 50%;
     position: absolute;
@@ -56,6 +56,11 @@ const StyledIconButton = styled.div`
   &:hover {
     &::after {
       transform: scale(1, 1);
+    }
+  }
+  @media (max-width: 900px) {
+    &::after {
+      width: 100%;
     }
   }
 `;

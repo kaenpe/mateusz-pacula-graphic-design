@@ -156,7 +156,7 @@ const SideDrawer = () => {
               }
             )}
 
-            <Link href={'/kontakt'}>
+            <Link href={'/messages'}>
               <StyledSideDrawerTab
                 theme={theme}
                 active={router.pathname === '/messages'}
