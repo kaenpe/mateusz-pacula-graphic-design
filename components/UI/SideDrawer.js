@@ -16,6 +16,7 @@ const StyledHamburger = styled(IconButton)`
   && {
     margin-left: ${({ theme }) => theme.spacing(2)};
     color: ${({ theme }) => theme.palette.secondary.main};
+    align-self: center;
     &:hover {
       background-color: ${({ theme }) =>
         fade(theme.palette.secondary.light, 0.25)};
@@ -28,7 +29,7 @@ const StyledSideDrawer = styled(motion.div)`
   height: 100vh;
   z-index: 3;
   display: grid;
-  grid-auto-rows: auto;
+  grid-template-rows: repeat(9, 1fr);
   overflow-x: hidden;
   white-space: nowrap;
 `;
