@@ -10,7 +10,7 @@ const StyledForm = styled(Form)`
   grid-row: 2;
   display: flex;
   flex-direction: column;
-  width: 30vw;
+  min-width: 30vw;
   margin-top: 10vh;
   align-self: flex-start;
   justify-self: center;
