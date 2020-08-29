@@ -35,7 +35,7 @@ const Message = ({ message, deleteMessage }) => {
       key={message.id}
       theme={theme}
       onClick={() => deleteMessage(message.id)}
-      initial={{ x: 0, height: 0 }}
+      initial={{ x: 0, height: 'auto' }}
       animate={{ x: 0, height: 'auto' }}
       exit={{ x: '-110vw', height: 0 }}
       transition={{ duration: 0.5 }}

@@ -29,7 +29,7 @@ export const StyledFlexWrapper = styled.div`
   justify-content: ${({ tabs, logo, hamburger, icons }) =>
     tabs || hamburger ? 'flex-start' : logo ? 'center' : icons && 'flex-end'};
   width: 420px;
-  align-items: flex-start;
+  align-items: center;
   position: relative;
 
   &:hover {
@@ -55,7 +55,7 @@ export const StyledIconButton = styled(IconButton)`
 const Navbar = () => {
   //variables
   const theme = useTheme();
-  const matches = useMediaQuery('(min-width:730px)');
+  const matches = useMediaQuery('(min-width:850px)');
   //
   //states
   const { auth } = useContext(AuthContext);
@@ -80,24 +80,18 @@ const Navbar = () => {
       {matches ? <DesktopTabs></DesktopTabs> : <SideDrawer></SideDrawer>}
 
       <StyledFlexWrapper icons>
-        {auth ? (
-          <StyledTab theme={theme} onClick={() => logout()}>
-            <Typography variant='button'>Logout</Typography>
-          </StyledTab>
-        ) : (
-          <>
+        {matches &&
+          (auth ? (
+            <StyledTab theme={theme} onClick={() => logout()}>
+              <Typography variant='button'>Logout</Typography>
+            </StyledTab>
+          ) : (
             <Link href='/login'>
               <StyledTab theme={theme}>
                 <Typography variant='button'>Login</Typography>
               </StyledTab>
             </Link>
-            {/* <Link href='/signup'>
-              <StyledTab theme={theme}>
-                <Typography variant='button'>Signup</Typography>
-              </StyledTab>
-            </Link> */}
-          </>
-        )}
+          ))}
         <StyledMenuItem>
           <StyledIconButton color='secondary' theme={theme}>
             <InstagramIcon></InstagramIcon>

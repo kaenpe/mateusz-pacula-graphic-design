@@ -10,6 +10,7 @@ import { DrawerContext } from '../../contexts/DrawerContext';
 import Link from '../../src/Link';
 import { StyledTab } from './DesktopTabs';
 import { StyledFlexWrapper, StyledMenuItem } from './Navbar';
+import { AuthContext } from '../../contexts/AuthContext';
 //styled-components
 const StyledHamburger = styled(IconButton)`
   && {
@@ -77,6 +78,7 @@ const SideDrawer = () => {
   //states
   const { openSideDrawer, setOpenSideDrawer } = useContext(DrawerContext);
   const { category } = useContext(CategoryContext);
+  const { auth } = useContext(AuthContext);
   //
 
   //functions
@@ -157,11 +159,25 @@ const SideDrawer = () => {
             <Link href={'/kontakt'}>
               <StyledSideDrawerTab
                 theme={theme}
-                active={category === 'kontakt'}
+                active={router.pathname === '/kontakt'}
               >
                 <Typography variant='button'>KONTAKT</Typography>
               </StyledSideDrawerTab>
             </Link>
+            {auth ? (
+              <StyledSideDrawerTab theme={theme} onClick={() => logout()}>
+                <Typography variant='button'>Logout</Typography>
+              </StyledSideDrawerTab>
+            ) : (
+              <Link href='/login'>
+                <StyledSideDrawerTab
+                  theme={theme}
+                  active={router.pathname === '/login'}
+                >
+                  <Typography variant='button'>Login</Typography>
+                </StyledSideDrawerTab>
+              </Link>
+            )}
             <StyledLogoWrapper theme={theme}>
               <StyledLogo src='/bialelogo.png' alt='navlogo'></StyledLogo>
             </StyledLogoWrapper>
