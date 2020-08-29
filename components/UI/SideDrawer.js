@@ -159,9 +159,9 @@ const SideDrawer = () => {
             <Link href={'/kontakt'}>
               <StyledSideDrawerTab
                 theme={theme}
-                active={router.pathname === '/kontakt'}
+                active={router.pathname === '/messages'}
               >
-                <Typography variant='button'>KONTAKT</Typography>
+                <Typography variant='button'>WIADOMOŚCI</Typography>
               </StyledSideDrawerTab>
             </Link>
             {auth ? (

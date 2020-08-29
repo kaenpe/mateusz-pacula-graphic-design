@@ -46,7 +46,7 @@ const StyledIconButton = styled.div`
     background-color: ${({ theme }) =>
       fade(theme.palette.secondary.dark, 0.25)};
     content: '';
-    width: 50%;
+    width: 100%;
     height: 100%;
     border-radius: 50%;
     position: absolute;
