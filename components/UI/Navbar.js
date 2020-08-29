@@ -40,6 +40,7 @@ export const StyledMenuItem = styled(MenuItem)`
   && {
     &:hover {
       background-color: transparent;
+      cursor: default;
     }
   }
 `;
@@ -79,7 +80,7 @@ const Navbar = () => {
     <Navigation theme={theme}>
       {matches ? <DesktopTabs></DesktopTabs> : <SideDrawer></SideDrawer>}
 
-      <StyledFlexWrapper icons>
+      <StyledFlexWrapper icons style={{ alignItems: 'center' }}>
         {matches &&
           (auth ? (
             <StyledTab theme={theme} onClick={() => logout()}>

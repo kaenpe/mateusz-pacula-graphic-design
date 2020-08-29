@@ -92,7 +92,7 @@ const ContactForm = () => {
         {({ values, isSubmitting }) => (
           <StyledForm theme={theme}>
             <header>
-              <Typography variant='h3' alignCenter>
+              <Typography variant='h3'>
                 <strong>KONTAKT</strong>
               </Typography>
             </header>
