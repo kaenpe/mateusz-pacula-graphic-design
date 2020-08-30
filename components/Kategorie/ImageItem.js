@@ -19,7 +19,7 @@ const StyledImageItemWrapper = styled(motion.div)`
   overflow: hidden;
   padding: 40%;
   opacity: 0.8;
-  border-radius: 40px;
+  border-radius: 25px;
   border: ${({ theme }) => `2px solid ${theme.palette.primary.dark}`};
   cursor: pointer;
   &::after {
@@ -29,7 +29,7 @@ const StyledImageItemWrapper = styled(motion.div)`
     height: 100%;
     top: 0;
     left: 0;
-    border-radius: 40px;
+    border-radius: 25px;
     position: absolute;
     transition: transform 0.3s ease-out;
     transform: scale(0.001, 0.001);
