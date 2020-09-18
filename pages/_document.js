@@ -39,6 +39,7 @@ class MyDocument extends Document {
       <html lang='en' dir='ltr'>
         <Head>
           <meta charSet='utf-8' />
+          <link rel='shortcut icon' href='/gigaicon.ico' />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
 
           {/* PWA primary color */}
